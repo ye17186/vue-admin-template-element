@@ -1,0 +1,25 @@
+@mixin scrollStyle() {
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #c4c7cd;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #e7ebf1;
+  }
+}
+
+/* 开始过渡阶段,动画出去阶段 */
+.fade-enter-active{
+  transition: all 0.3s ease-out;
+}
+/* 进入开始 */
+.fade-enter{
+  transform: translateY(30px);
+  opacity: 0;
+}
+
