@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './plugins/axios-config'
+import config from '../public/config/config'
 
 import NProgress from 'nprogress'
 import './assets/iconfont/iconfont.css'
@@ -14,6 +15,7 @@ import CacheUtils from './plugins/utils/CacheUtils'
 import RouteUtils from './plugins/utils/RouteUtils'
 import PageUtils from './plugins/utils/PageUtils'
 
+Vue.prototype.$CONFIG = config
 Vue.config.productionTip = false
 NProgress.configure({ showSpinner: false })
 
@@ -25,6 +27,10 @@ if (userInfo !== null) {
 }
 
 router.beforeEach((to, from, next) => {
+  // 动态修改标题
+  if (to.meta.title) {
+    document.title = to.meta.title + ' - ' + config.title
+  }
   // 当前用户缓存
   const currentUser = CacheUtils.getObject(CacheUtils.key.USER_INFO)
   // 已登录时，默认路由为首页，否则为登录页

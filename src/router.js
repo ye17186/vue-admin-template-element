@@ -10,7 +10,10 @@ const initRouter = function () {
       {
         path: '/a/login',
         name: 'Login',
-        component: Login
+        component: Login,
+        meta: {
+          title: '登录'
+        }
       }
     ]
   })

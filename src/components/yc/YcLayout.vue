@@ -68,14 +68,6 @@ export default {
       width: 100%;
       overflow: hidden;
     }
-
-    .yc-footer-container {
-      line-height: 30px;
-      text-align: center;
-      padding: 0;
-      background-color: #f0f2f5;
-      color: #767676;
-    }
   }
 </style>
 <style lang="scss">

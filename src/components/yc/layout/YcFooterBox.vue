@@ -1,5 +1,7 @@
 <template>
-  <div>Power By IT小跟班 @2019</div>
+  <el-footer height="30px" class="yc-footer-container">
+    {{ $CONFIG.footer }}
+  </el-footer>
 </template>
 
 <script>
@@ -8,6 +10,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .yc-footer-container {
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+    background-color: #f0f2f5;
+    color: #767676;
+  }
 
 </style>
