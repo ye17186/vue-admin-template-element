@@ -14,6 +14,87 @@ const initFullRouters = function () {
           hidden: true
         }
       }, {
+        path: 'example',
+        name: '组件示例',
+        component: () => import('../views/admin/EmptyPage'),
+        meta: {
+          title: '组件示例',
+          icon: 'el-icon-exp-account'
+        },
+        children: [
+          {
+            path: 'basic',
+            name: 'Basic',
+            component: () => import('../views/admin/EmptyPage'),
+            meta: {
+              title: 'Basic',
+              icon: 'el-icon-exp-account'
+            },
+            children: [
+              {
+                path: 'layout',
+                name: 'Layout',
+                component: () => import('../views/admin/example/basic/Layout'),
+                meta: {
+                  title: 'Layout',
+                  icon: 'el-icon-exp-account'
+                }
+              }, {
+                path: 'container',
+                name: 'Container',
+                component: () => import('../views/admin/example/basic/Container'),
+                meta: {
+                  title: 'Container',
+                  icon: 'el-icon-exp-account'
+                }
+              }, {
+                path: 'icon',
+                name: 'Icon',
+                component: () => import('../views/admin/example/basic/Icon'),
+                meta: {
+                  title: 'Icon',
+                  icon: 'el-icon-exp-account'
+                }
+              }, {
+                path: 'button',
+                name: 'Button',
+                component: () => import('../views/admin/example/basic/Button'),
+                meta: {
+                  title: 'Button',
+                  icon: 'el-icon-exp-account'
+                }
+              }, {
+                path: 'link',
+                name: 'Link',
+                component: () => import('../views/admin/example/basic/Link'),
+                meta: {
+                  title: 'Link',
+                  icon: 'el-icon-exp-account'
+                }
+              }
+            ]
+          }, {
+            path: 'form',
+            name: 'Form',
+            component: () => import('../views/admin/EmptyPage'),
+            meta: {
+              title: 'Form',
+              icon: 'el-icon-exp-account'
+            },
+            children: [
+              {
+                path: 'radio',
+                name: 'Radio',
+                component: () => import('../views/admin/example/form/Radio'),
+                meta: {
+                  title: 'Radio',
+                  icon: 'el-icon-exp-account'
+                }
+              }
+            ]
+          }
+        ]
+      }, {
         path: 'p1',
         name: 'Page1',
         component: () => import('../views/admin/page1/Page1'),
