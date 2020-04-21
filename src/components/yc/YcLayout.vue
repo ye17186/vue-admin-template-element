@@ -2,7 +2,7 @@
   <el-container class="yc-layout-container">
     <el-aside :width="isCollapse ? '65px' : '200px'" class="yc-aside-container">
       <div class="yc-logo-container">
-        <img src="../../assets/image/wx_logo.jpg"/>
+        <img src="../../assets/image/wx_logo.jpg" alt="IT小跟班"/>
       </div>
       <div class="yc-menu-container">
         <el-menu background-color="#20222a" text-color="#fff" active-text-color="#fff"
@@ -100,15 +100,26 @@
         </el-row>
       </el-header>
       <el-main class="yc-main-container">
-        <el-tabs class="yc-tabs-container" type="card" closable
-                 :value="activePage.name"
-                 @tab-click="handleTabClick"
-                 @tab-remove="handleTabRemove">
-          <el-tab-pane v-for="tab in pageTabs" :key="tab.name"
-                       :name="tab.name">
-            <span slot="label"><i :class="tab.meta.icon"></i> {{tab.meta.title}}</span>
-          </el-tab-pane>
-        </el-tabs>
+        <div class="yc-tabs-box">
+          <el-tabs class="yc-tabs-container" type="card" closable
+                   :value="activePage.name"
+                   @tab-click="handleTabClick"
+                   @tab-remove="handleTabRemove">
+            <el-tab-pane v-for="tab in pageTabs" :key="tab.name"
+                         :name="tab.name">
+              <span slot="label"><i :class="tab.meta.icon"></i> {{tab.meta.title}}</span>
+            </el-tab-pane>
+          </el-tabs>
+          <el-dropdown class="tab-action-btn">
+            <el-button type="primary" size="mini">
+              更多<i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item>关闭当前</el-dropdown-item>
+              <el-dropdown-item>关闭所有</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
         <div class="yc-page-container-layout">
           <div class="yc-page-container">
             <el-card>
@@ -248,6 +259,7 @@ export default {
     .yc-header-container {
       background-color: #fff;
       border-bottom: 2px solid #dcdcdc;
+      padding: 0;
       .yc-collapse-btn {
         line-height: 60px;
         font-size: 32px;
@@ -272,12 +284,24 @@ export default {
     }
     .yc-main-container {
       background-color: #f0f2f5;
+      padding: 0;
       height: 100%;
       width: 100%;
       overflow: hidden;
-      .yc-tabs-container {
-        border-bottom: 2px solid #dcdcdc;
-        height: 30px;
+      .yc-tabs-box {
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        .yc-tabs-container {
+          border-bottom: 2px solid #dcdcdc;
+          height: 30px;
+
+        }
+        .tab-action-btn {
+          position: absolute !important;
+          top: 1px;
+          right: 10px;
+        }
       }
       .yc-page-container-layout {
         height: calc(100% - 30px);
@@ -304,12 +328,6 @@ export default {
       border-right: none !important;
     }
   }
-  .yc-header-container {
-    padding: 0 !important;
-  }
-  .yc-main-container {
-    padding: 0 !important;
-  }
   .yc-tabs-container {
     background-color: #ffffff;
     margin-bottom: 10px;
@@ -325,7 +343,7 @@ export default {
       line-height: 30px !important;
       padding: 0 10px !important;
       &.is-active {
-        background-color: #42b983;
+        background-color: #409eff;
         color: #ffffff;
         border-bottom: 1px solid #fff;
       }
