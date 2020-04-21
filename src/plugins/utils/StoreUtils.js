@@ -4,6 +4,14 @@ const resetAll = function () {
   store.commit('resetAll')
 }
 
+const resetPageTab = function () {
+  store.commit('resetPageTab')
+}
+
+const setCollapse = function (collapse) {
+  store.commit('setCollapse', collapse)
+}
+
 const setActivePage = function (activePage) {
   store.commit('setActivePage', activePage)
 }
@@ -18,7 +26,9 @@ const setPageTabLink = function (tabs) {
 
 export default {
   resetAll,
+  resetPageTab,
   setActivePage,
   setPageTabs,
-  setPageTabLink
+  setPageTabLink,
+  setCollapse
 }

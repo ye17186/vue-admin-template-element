@@ -86,6 +86,13 @@ const removePageTab = function (tabName) {
 }
 
 /**
+ * 删除页面所有tab，同时打开主页
+ */
+const removeAllPageTab = function () {
+  StoreUtils.resetPageTab()
+}
+
+/**
  * 根据页面Key，获取tabs中的页面对象（路由对象）
  * @param pageKey 页面key（路由name）
  * @return {*}
@@ -105,5 +112,6 @@ const getRouteByPageKey = function (pageKey) {
 export default {
   addPageTab,
   removePageTab,
-  getRouteByPageKey
+  getRouteByPageKey,
+  removeAllPageTab
 }

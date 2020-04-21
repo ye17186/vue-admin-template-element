@@ -23,7 +23,7 @@
         <el-button size="small" type="primary" icon="el-icon-exp-search" @click="doFilter">查询</el-button>
       </el-col>
     </el-row>
-    <el-divider></el-divider>
+    <yc-query-divider></yc-query-divider>
     <el-table class="yc-table" size="small" stripe v-loading="false"
               :data="tableData">
       <el-table-column type="index" width="50"></el-table-column>
@@ -40,9 +40,10 @@
 <script>
 import YcGenderSelect from '../../../components/select/YcGenderSelect'
 import formatter from '../../../plugins/formatter/labelFormatter'
+import YcQueryDivider from '../../../components/yc/layout/YcQueryDivider'
 export default {
   name: 'Page1',
-  components: { YcGenderSelect },
+  components: { YcQueryDivider, YcGenderSelect },
   data: function () {
     return {
       formatter: formatter,

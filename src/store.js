@@ -13,6 +13,7 @@ const homePageTab = {
 }
 export default new Vuex.Store({
   state: {
+    collapse: false,
     hasAddRoutes: false,
     activePage: {},
     pageTabs: [homePageTab],
@@ -20,10 +21,18 @@ export default new Vuex.Store({
   },
   mutations: {
     resetAll: function (state) {
+      state.collapse = false
       state.hasAddRoutes = false
       state.activePage = {}
       state.pageTabs = [homePageTab]
       state.pageTabLink = [homePageTab]
+    },
+    resetPageTab: function (state) {
+      state.pageTabs = [homePageTab]
+      state.pageTabLink = [homePageTab]
+    },
+    setCollapse: function (state, value) {
+      state.collapse = value
     },
     setHasAddRoutes: function (state, value) {
       state.hasAddRoutes = value
@@ -41,6 +50,12 @@ export default new Vuex.Store({
   actions: {
     resetAll: function (context) {
       context.commit('resetAll')
+    },
+    resetPageTab: function (context) {
+      context.commit('resetPageTab')
+    },
+    setCollapse: function (context, value) {
+      context.commit('setCollapse', value)
     },
     setHasAddRoutes: function (context, value) {
       context.commit('setHasAddRoutes', value)
