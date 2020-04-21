@@ -1,57 +1,51 @@
 <template>
   <div>
-    <el-card :body-style="{padding: '10px 20px'}" style="margin-bottom: 5px;">
-      <el-row :gutter="20">
-        <el-col :span="20">
-          <el-row :gutter="20">
-            <el-col :span="4">
-              <el-input size="small" placeholder="手机号" clearable
-                        v-model="Request.FilterRequest.mobile"></el-input>
-            </el-col>
-            <el-col :span="4">
-              <el-input size="small" placeholder="用户名" clearable
-                        v-model="Request.FilterRequest.username"></el-input>
-            </el-col>
-            <el-col :span="4">
-              <el-select size="small" placeholder="性别" clearable
-                         v-model="Request.FilterRequest.gender" >
-                <el-option label="男" value="M"></el-option>
-                <el-option label="女" value="F"></el-option>
-                <el-option label="无限制" value=""></el-option>
-              </el-select>
-            </el-col>
-          </el-row>
-        </el-col>
-        <el-col :span="4" style="text-align: right;">
-          <el-button size="small" icon="el-icon-exp-refresh" @click="doReset">重置</el-button>
-          <el-button size="small" type="primary" icon="el-icon-exp-search" @click="doFilter">查询</el-button>
-        </el-col>
-      </el-row>
-    </el-card>
-    <el-card>
-      <el-table class="yc-table" size="small" stripe v-loading="false"
-                :data="tableData">
-        <el-table-column type="index" width="50"></el-table-column>
-        <el-table-column prop="mobile" label="手机号"></el-table-column>
-        <el-table-column prop="username" label="用户名"></el-table-column>
-        <el-table-column prop="gender" label="性别">
-          <template slot-scope="scope">
-            <span>{{ scope.row.gender === 'M' ? '男' : '女' }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="age" label="年龄"></el-table-column>
-        <el-table-column prop="address" label="家庭住址" show-overflow-tooltip></el-table-column>
-      </el-table>
-      <el-pagination style="text-align: right;" layout="prev, pager, next" :total="1000"></el-pagination>
-    </el-card>
+    <el-row :gutter="20">
+      <el-col :span="16">
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <el-input size="small" placeholder="手机号" clearable
+                      v-model="Request.FilterRequest.mobile"></el-input>
+          </el-col>
+          <el-col :span="6">
+            <el-input size="small" placeholder="用户名" clearable
+                      v-model="Request.FilterRequest.username"></el-input>
+          </el-col>
+          <el-col :span="6">
+            <yc-gender-select size="small" show-value clearable
+                              v-model="Request.FilterRequest.gender"
+                              :value="Request.FilterRequest.gender"></yc-gender-select>
+          </el-col>
+        </el-row>
+      </el-col>
+      <el-col :span="8" style="text-align: right;">
+        <el-button size="small" icon="el-icon-exp-refresh" @click="doReset">重置</el-button>
+        <el-button size="small" type="primary" icon="el-icon-exp-search" @click="doFilter">查询</el-button>
+      </el-col>
+    </el-row>
+    <el-divider></el-divider>
+    <el-table class="yc-table" size="small" stripe v-loading="false"
+              :data="tableData">
+      <el-table-column type="index" width="50"></el-table-column>
+      <el-table-column prop="mobile" label="手机号"></el-table-column>
+      <el-table-column prop="username" label="用户名"></el-table-column>
+      <el-table-column prop="gender" label="性别" :formatter="genderFormatter"></el-table-column>
+      <el-table-column prop="age" label="年龄"></el-table-column>
+      <el-table-column prop="address" label="家庭住址" show-overflow-tooltip></el-table-column>
+    </el-table>
+    <el-pagination style="text-align: right;" layout="total, prev, pager, next" :total="1000"></el-pagination>
   </div>
 </template>
 
 <script>
+import YcGenderSelect from '../../../components/select/YcGenderSelect'
+import formatter from '../../../plugins/formatter/labelFormatter'
 export default {
   name: 'Page1',
+  components: { YcGenderSelect },
   data: function () {
     return {
+      formatter: formatter,
       Request: {
         FilterRequest: {
           mobile: '',
@@ -124,6 +118,9 @@ export default {
     },
     doFilter: function () {
       console.log(this.Request.FilterRequest)
+    },
+    genderFormatter: function (row) {
+      return formatter.gender(row.gender, true)
     }
   }
 }

@@ -5,7 +5,8 @@
         <img src="../../assets/image/wx_logo.jpg"/>
       </div>
       <div class="yc-menu-container">
-        <el-menu background-color="#545c64" text-color="#fff" :unique-opened="true"
+        <el-menu background-color="#20222a" text-color="#fff" active-text-color="#fff"
+                 :unique-opened="true"
                  :collapse="isCollapse"
                  :default-active="activePage.name"
                  :router="true">
@@ -108,10 +109,14 @@
             <span slot="label"><i :class="tab.meta.icon"></i> {{tab.meta.title}}</span>
           </el-tab-pane>
         </el-tabs>
-        <div class="yc-page-container">
-          <transition name="fade">
-            <router-view></router-view>
-          </transition>
+        <div class="yc-page-container-layout">
+          <div class="yc-page-container">
+            <el-card>
+              <transition name="fade">
+                <router-view></router-view>
+              </transition>
+            </el-card>
+          </div>
         </div>
       </el-main>
       <el-footer height="30px" class="yc-footer-container">
@@ -211,7 +216,7 @@ export default {
     height: 100%;
     width: 100%;
     .yc-aside-container {
-      background-color: #545c64;
+      background-color: #20222a;
       overflow: hidden;
       transition: width .3s;
       -moz-transition: width .3s;
@@ -234,6 +239,10 @@ export default {
         overflow-y: auto;
         overflow-x: hidden;
         @include scrollStyle;
+        .el-menu-item.is-active {
+          background-color: rgba(0,0,0,.8) !important;
+          border-left: 4px solid #409eff;
+        }
       }
     }
     .yc-header-container {
@@ -262,6 +271,7 @@ export default {
       }
     }
     .yc-main-container {
+      background-color: #f0f2f5;
       height: 100%;
       width: 100%;
       overflow: hidden;
@@ -269,19 +279,21 @@ export default {
         border-bottom: 2px solid #dcdcdc;
         height: 30px;
       }
-      .yc-page-container {
-        height: calc(100% - 40px);
-        width: calc(100% - 10px);
-        padding: 10px 0 0 10px;
-        overflow: auto;
+      .yc-page-container-layout {
+        height: calc(100% - 30px);
+        overflow: hidden auto;
         @include scrollStyle;
+      }
+      .yc-page-container {
+        box-sizing: border-box;
+        padding: 0 8px;
       }
     }
     .yc-footer-container {
       line-height: 30px;
       text-align: center;
       padding: 0;
-      background-color: #e1e5eb;
+      background-color: #f0f2f5;
       color: #767676;
     }
   }
@@ -299,6 +311,8 @@ export default {
     padding: 0 !important;
   }
   .yc-tabs-container {
+    background-color: #ffffff;
+    margin-bottom: 10px;
     .el-tabs__header {
       margin: 0;
       height: 30px;
