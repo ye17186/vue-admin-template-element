@@ -1,6 +1,6 @@
 import router from '../../router'
 import store from '../../store'
-import { getFullRouters } from '../full-router'
+import { getFullRouters } from '../../assets/config/full-router'
 
 /**
  * 递归构建用户路由
