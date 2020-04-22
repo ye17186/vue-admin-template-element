@@ -1,28 +1,11 @@
-# yclouds-admin-web4
+# yclouds-admin-web
+IT小跟班后台管理平台
 
-Admin Project Base on Vue3.0
+# 关于我
+- 作者：ye17186
+- 博客：[https://blog.it-follower.com](https://blog.it-follower.com)
+- 邮箱：ye17186@163.com
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+# 技术选型
+- Vue 3.0
+- ElementUI 2.13.1
