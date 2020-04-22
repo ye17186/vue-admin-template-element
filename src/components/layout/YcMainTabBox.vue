@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import PageUtils from '../../../plugins/utils/PageUtils'
-import RouteUtils from '../../../plugins/utils/RouteUtils'
+import PageUtils from '../../plugins/utils/PageUtils'
+import RouteUtils from '../../plugins/utils/RouteUtils'
 
 export default {
   name: 'YcMainTabBox',
@@ -60,6 +60,7 @@ export default {
         this.handleTabRemove(this.activePage.name)
       } else if (command === 'all') {
         PageUtils.removeAllPageTab()
+        RouteUtils.goto('Home')
       }
     }
   }

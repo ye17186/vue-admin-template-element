@@ -37,17 +37,17 @@
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <img class="yc-user-avatar" src="../../../assets/image/wx_logo.jpg" alt="用户头像"/>
+        <img class="yc-user-avatar" src="../../assets/image/wx_logo.jpg" alt="用户头像"/>
       </div>
     </el-col>
   </el-row>
 </template>
 
 <script>
-import CacheUtils from '../../../plugins/utils/CacheUtils'
-import StoreUtils from '../../../plugins/utils/StoreUtils'
-import RouteUtils from '../../../plugins/utils/RouteUtils'
-import { resetRouter } from '../../../router'
+import CacheUtils from '../../plugins/utils/CacheUtils'
+import StoreUtils from '../../plugins/utils/StoreUtils'
+import RouteUtils from '../../plugins/utils/RouteUtils'
+import { resetRouter } from '../../router'
 
 export default {
   name: 'YcHeaderBox',

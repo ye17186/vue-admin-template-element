@@ -20,6 +20,26 @@
         <el-radio :label="3">备选项3</el-radio>
       </el-radio-group>
     </section>
+
+    <section>
+      <el-divider content-position="left">按钮样式</el-divider>
+      <el-row style="margin-bottom: 10px;">
+        <el-radio-group v-model="radio4">
+          <el-radio-button :label="1">上海</el-radio-button>
+          <el-radio-button :label="2">北京</el-radio-button>
+          <el-radio-button :label="3">广州</el-radio-button>
+          <el-radio-button :label="4">深圳</el-radio-button>
+        </el-radio-group>
+      </el-row>
+      <el-row>
+        <el-radio-group v-model="radio4" size="mini">
+          <el-radio-button :label="1">上海</el-radio-button>
+          <el-radio-button :label="2">北京</el-radio-button>
+          <el-radio-button :label="3">广州</el-radio-button>
+          <el-radio-button :label="4">深圳</el-radio-button>
+        </el-radio-group>
+      </el-row>
+    </section>
   </div>
 </template>
 
@@ -30,7 +50,8 @@ export default {
     return {
       radio1: '1',
       radio2: '2',
-      radio3: 3
+      radio3: 3,
+      radio4: 2
     }
   }
 }

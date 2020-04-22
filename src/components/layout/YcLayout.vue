@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import YcAsideBox from './layout/YcAsideBox'
-import YcHeaderBox from './layout/YcHeaderBox'
-import YcMainBox from './layout/YcMainBox'
-import YcFooterBox from './layout/YcFooterBox'
+import YcAsideBox from './YcAsideBox'
+import YcHeaderBox from './YcHeaderBox'
+import YcMainBox from './YcMainBox'
+import YcFooterBox from './YcFooterBox'
 
 export default {
   name: 'YcLayout',

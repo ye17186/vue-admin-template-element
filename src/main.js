@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './plugins/axios-config'
-import config from '../public/config/config'
+import config from './config/config'
 
 import NProgress from 'nprogress'
 import './assets/iconfont/iconfont.css'
