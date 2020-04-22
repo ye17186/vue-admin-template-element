@@ -4,6 +4,10 @@ import Login from './views/admin/login/Login'
 
 Vue.use(Router)
 
+/**
+ * 初始化路由
+ * @return {VueRouter}
+ */
 const initRouter = function () {
   return new Router({
     routes: [

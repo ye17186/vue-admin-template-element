@@ -1,4 +1,5 @@
 export default {
+  lang: '中文',
   login: {
     loginBtn: '登录',
     mobile: '手机号',

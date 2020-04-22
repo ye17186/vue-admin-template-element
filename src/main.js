@@ -29,6 +29,7 @@ if (userInfo !== null) {
   RouteUtils.addRoutes(userRoutes)
 }
 
+// 页面路由前处理
 router.beforeEach((to, from, next) => {
   // 动态修改标题
   if (to.meta.title) {
@@ -53,6 +54,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 页面路由后处理
 router.afterEach(to => {
   PageUtils.addPageTab(to)
   NProgress.done()

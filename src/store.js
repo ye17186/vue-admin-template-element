@@ -13,6 +13,7 @@ const homePageTab = {
 }
 export default new Vuex.Store({
   state: {
+    lang: 'zh-CN',
     collapse: false,
     hasAddRoutes: false,
     activePage: {},
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     pageTabLink: [homePageTab]
   },
   mutations: {
+    setLang: function (state, value) {
+      state.lang = value
+    },
     resetAll: function (state) {
       state.collapse = false
       state.hasAddRoutes = false
@@ -48,6 +52,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setLang: function (context, value) {
+      context.commit('setLang', value)
+    },
     resetAll: function (context) {
       context.commit('resetAll')
     },
