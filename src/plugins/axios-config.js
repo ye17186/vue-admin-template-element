@@ -2,7 +2,7 @@ import axios from 'axios'
 import CacheUtils from './utils/CacheUtils'
 
 // 请求地址
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8080/api/admin/v1' : 'http://172.26.0.1:8443/api/admin/v1'
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
 // 超时时间
 axios.defaults.timeout = 10000
 

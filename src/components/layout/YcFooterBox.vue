@@ -1,6 +1,6 @@
 <template>
   <el-footer height="30px" class="yc-footer-container">
-    {{ $CONFIG.footer }}
+    {{ $CONFIG.web.footer }}
   </el-footer>
 </template>
 

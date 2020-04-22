@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './plugins/axios-config'
-import config from './config/config'
+import i18n from './assets/i18n/i18n'
+import config from './assets/config/config'
+import api from './assets/config/api'
 
 import NProgress from 'nprogress'
 import './assets/iconfont/iconfont.css'
@@ -16,6 +18,7 @@ import RouteUtils from './plugins/utils/RouteUtils'
 import PageUtils from './plugins/utils/PageUtils'
 
 Vue.prototype.$CONFIG = config
+Vue.prototype.$API = api
 Vue.config.productionTip = false
 NProgress.configure({ showSpinner: false })
 
@@ -29,7 +32,7 @@ if (userInfo !== null) {
 router.beforeEach((to, from, next) => {
   // 动态修改标题
   if (to.meta.title) {
-    document.title = to.meta.title + ' - ' + config.title
+    document.title = to.meta.title + ' - ' + config.web.title
   }
   // 当前用户缓存
   const currentUser = CacheUtils.getObject(CacheUtils.key.USER_INFO)
@@ -58,5 +61,6 @@ router.afterEach(to => {
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

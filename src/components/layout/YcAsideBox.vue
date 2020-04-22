@@ -1,7 +1,7 @@
 <template>
   <div style="height: 100%;">
     <div class="yc-logo-box">
-      <img :src="collapse ? $CONFIG.logoMin : $CONFIG.logoMax" alt="IT小跟班"/>
+      <img :src="collapse ? $CONFIG.web.logo.min : $CONFIG.web.logo.max" alt="IT小跟班"/>
     </div>
     <div class="yc-menu-box">
       <el-menu background-color="#20222a" text-color="#ffffff" active-text-color="#ffffff"
