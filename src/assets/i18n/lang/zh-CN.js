@@ -15,7 +15,10 @@ export default {
       lockPwdEmpty: '锁屏密码不能为空'
     },
     notice: {
-      tip: '消息通知'
+      tip: '消息通知',
+      email: '邮件',
+      notice: '通知',
+      message: '消息'
     }
   }
 }

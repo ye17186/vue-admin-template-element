@@ -15,7 +15,10 @@ export default {
       lockPwdEmpty: 'lock password can not empty'
     },
     notice: {
-      tip: 'notice'
+      tip: 'notice',
+      email: 'email',
+      notice: 'notice',
+      message: 'message'
     }
   }
 }
