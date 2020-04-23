@@ -11,7 +11,11 @@ export default {
   },
   headerBar: {
     lock: {
+      tip: '锁屏',
       lockPwdEmpty: '锁屏密码不能为空'
+    },
+    notice: {
+      tip: '消息通知'
     }
   }
 }

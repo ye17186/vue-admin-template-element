@@ -11,7 +11,11 @@ export default {
   },
   headerBar: {
     lock: {
+      tip: 'lock',
       lockPwdEmpty: 'lock password can not empty'
+    },
+    notice: {
+      tip: 'notice'
     }
   }
 }

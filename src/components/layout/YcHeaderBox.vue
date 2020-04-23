@@ -17,18 +17,18 @@
     </el-col>
     <el-col :span="10">&nbsp;</el-col>
     <el-col :span="5">
-      <yc-header-bar-right></yc-header-bar-right>
+      <yc-header-bar-box-right></yc-header-bar-box-right>
     </el-col>
   </el-row>
 </template>
 
 <script>
 import StoreUtils from '../../plugins/utils/StoreUtils'
-import YcHeaderBarRight from './YcHeaderBarRight'
+import YcHeaderBarBoxRight from './YcHeaderBarBoxRight'
 
 export default {
   name: 'YcHeaderBox',
-  components: { YcHeaderBarRight },
+  components: { YcHeaderBarBoxRight },
   computed: {
     activeFullTitle: function () {
       let fullTitle = []

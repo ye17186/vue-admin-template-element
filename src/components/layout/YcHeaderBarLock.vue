@@ -1,10 +1,11 @@
 <template>
   <span>
-    <el-tooltip effect="dark" content="锁屏" placement="top-start">
-      <i class="el-icon-lock" @click="show = true"></i>
+    <el-tooltip effect="dark" placement="top-start"
+                :content="$t('headerBar.lock.tip')" >
+      <i class="el-icon-lock" @click="show = true" :style="'font-size:' + iconSize + ';'"></i>
     </el-tooltip>
 
-    <el-dialog title="设置锁屏密码" width="30%"  :visible.sync="show">
+    <el-dialog title="设置锁屏密码" width="30%" :visible.sync="show">
       <el-form ref="LockForm" label-width="80px" :model="form">
         <el-form-item label="锁屏密码" prop="lockPwd"
                       verify :empty-message="$t('headerBar.lock.lockPwdEmpty')">
@@ -24,6 +25,12 @@ import RouteUtils from '../../plugins/utils/RouteUtils'
 
 export default {
   name: 'YcHeaderBarLock',
+  props: {
+    iconSize: {
+      type: String,
+      default: '20px'
+    }
+  },
   data: function () {
     return {
       show: false,
