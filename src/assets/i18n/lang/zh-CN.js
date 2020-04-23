@@ -8,5 +8,10 @@ export default {
     mobileEmpty: '手机号不能为空',
     passwordEmpty: '密码不能为空',
     codeEmpty: '验证码不能为空'
+  },
+  headerBar: {
+    lock: {
+      lockPwdEmpty: '锁屏密码不能为空'
+    }
   }
 }

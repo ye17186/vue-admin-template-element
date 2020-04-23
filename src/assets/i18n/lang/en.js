@@ -8,5 +8,10 @@ export default {
     mobileEmpty: 'mobile can not empty',
     passwordEmpty: 'password can not empty',
     codeEmpty: 'verify code can not empty'
+  },
+  headerBar: {
+    lock: {
+      lockPwdEmpty: 'lock password can not empty'
+    }
   }
 }

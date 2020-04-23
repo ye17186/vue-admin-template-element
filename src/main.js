@@ -11,6 +11,7 @@ import api from './assets/config/api'
 import NProgress from 'nprogress'
 import './assets/iconfont/iconfont.css'
 import 'nprogress/nprogress.css'
+import 'animate.css'
 
 import './assets/css/common.scss'
 import CacheUtils from './plugins/utils/CacheUtils'

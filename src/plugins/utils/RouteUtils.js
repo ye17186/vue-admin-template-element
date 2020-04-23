@@ -36,8 +36,12 @@ export default {
     if (!store.state.hasAddRoutes) {
       store.commit('setHasAddRoutes', true)
       router.addRoutes([userRoutes])
-      // 动态路由加载完之后，再加入404等路由
+      // 动态路由加载完之后，再加入404、lock等路由
       router.addRoutes([{
+        path: '/lock',
+        name: 'Lock',
+        component: () => import('../../views/admin/lock/Lock')
+      }, {
         path: '*',
         name: 'Page404',
         component: () => import('../../views/admin/error/Page404')
