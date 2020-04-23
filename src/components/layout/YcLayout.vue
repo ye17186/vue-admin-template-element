@@ -10,7 +10,7 @@
       <el-main class="yc-main-container">
         <yc-main-box></yc-main-box>
       </el-main>
-      <el-footer height="30px" class="yc-footer-container">
+      <el-footer height="30px" class="yc-footer-container" style="padding: 0;">
         <yc-footer-box></yc-footer-box>
       </el-footer>
     </el-container>

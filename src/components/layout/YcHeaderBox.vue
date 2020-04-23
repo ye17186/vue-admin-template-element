@@ -5,7 +5,7 @@
         <i :class="'el-icon-exp-bars yc-collapse-btn '  + (collapse ? ' is-active' : '')"></i>
       </div>
     </el-col>
-    <el-col :span="8">
+    <el-col :span="6">
       <div class="yc-breads-container">
         <el-breadcrumb separator="/" style="line-height: 60px;">
           <el-breadcrumb-item :to="{name: 'Home'}">首页</el-breadcrumb-item>
@@ -15,7 +15,12 @@
         </el-breadcrumb>
       </div>
     </el-col>
-    <el-col :span="10">&nbsp;</el-col>
+    <el-col :span="12">
+      <el-link style="margin-right: 10px;" icon="el-icon-s-help" :underline="false" target="_blank"
+               href="https://blog.it-follower.com">个人博客</el-link>
+      <el-link icon="el-icon-s-help" :underline="false" target="_blank"
+               href="https://github.com/ye17186">GitHub</el-link>
+    </el-col>
     <el-col :span="5">
       <yc-header-bar-box-right></yc-header-bar-box-right>
     </el-col>
