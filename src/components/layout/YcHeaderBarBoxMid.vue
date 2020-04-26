@@ -52,13 +52,6 @@ export default {
     }
   }
 
-  .yc-title-breads {
-    line-height: 60px;
-    position: absolute;
-    left: 60px;
-    display: inline-block;
-  }
-
   .top-bar-link {
     margin: 0 5px;
   }

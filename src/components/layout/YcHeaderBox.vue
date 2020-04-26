@@ -46,6 +46,7 @@ export default {
     align-items: center;
     &.is-left {
       display: flex;
+      width: 380px;
     }
     &.is-mid {
       box-sizing: border-box;
