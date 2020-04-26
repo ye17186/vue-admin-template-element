@@ -1,11 +1,11 @@
 <template>
   <div class="yc-tabs-container">
-    <el-tabs class="yc-tabs-box" type="card" closable
+    <el-tabs class="yc-tabs-box" type="card"
              :value="activePage.name"
              @tab-click="handleTabClick"
              @tab-remove="handleTabRemove">
       <el-tab-pane v-for="tab in pageTabs" :key="tab.name"
-                   :name="tab.name">
+                   :name="tab.name" :closable="tab.name !== 'Home'" >
         <span slot="label"><i :class="tab.meta.icon"></i> {{tab.meta.title}}</span>
       </el-tab-pane>
     </el-tabs>
@@ -51,7 +51,6 @@ export default {
      * @param tabName 删除的页面名
      */
     handleTabRemove: function (tabName) {
-      console.log(tabName)
       const newTab = PageUtils.removePageTab(tabName)
       RouteUtils.goto(newTab)
     },
@@ -67,17 +66,32 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .yc-tabs-container {
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    border-bottom: 2px solid #dcdcdc;
+    background-color: #ffffff;
+    margin-bottom: 8px;
+    height: 30px;
     padding-right: 100px;
-    .yc-tabs-box {
-      height: 30px;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    .el-tabs__header {
+      margin: 0 !important;
+      border: none;
     }
-
+    .el-tabs__item {
+      height: 30px !important;
+      line-height: 30px !important;
+      padding: 0 5px !important;
+      &.is-active {
+        background-color: #409eff;
+        color: #ffffff;
+        border-radius: 5px;
+      }
+    }
+    .el-tabs__nav-next, .el-tabs__nav-prev {
+      line-height: 30px !important;
+    }
     .tab-action-btn {
       position: absolute !important;
       top: 1px;

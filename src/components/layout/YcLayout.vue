@@ -83,28 +83,4 @@ export default {
       border-right: none !important;
     }
   }
-  .yc-tabs-container {
-    background-color: #ffffff;
-    margin-bottom: 10px;
-    .el-tabs__header {
-      margin: 0;
-      height: 30px;
-    }
-    .el-tabs__nav .el-tabs__item:nth-child(1) span.el-icon-close{
-      display: none;
-    }
-    .el-tabs__item {
-      height: 30px !important;
-      line-height: 30px !important;
-      padding: 0 10px !important;
-      &.is-active {
-        background-color: #409eff;
-        color: #ffffff;
-        border-bottom: 1px solid #fff;
-      }
-    }
-    .el-tabs__nav-next, .el-tabs__nav-prev {
-      line-height: 30px !important;
-    }
-  }
 </style>
