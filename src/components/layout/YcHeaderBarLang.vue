@@ -1,14 +1,12 @@
 <!-- 语言切换功能菜单 -->
 <template>
-  <span>
-    <el-dropdown size="mini" @command="handleLang">
-      <i class="el-icon-place" :style="'font-size:' + iconSize + ';'"></i>
-      <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="zh-CN">中文</el-dropdown-item>
-          <el-dropdown-item command="en">English</el-dropdown-item>
-        </el-dropdown-menu>
-    </el-dropdown>
-  </span>
+  <el-dropdown size="mini" @command="handleLang">
+    <i class="el-icon-platform-eleme" :style="'font-size:' + iconSize + ';'"></i>
+    <el-dropdown-menu slot="dropdown">
+      <el-dropdown-item command="zh-CN">中文</el-dropdown-item>
+      <el-dropdown-item command="en">English</el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
 </template>
 
 <script>
@@ -38,5 +36,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

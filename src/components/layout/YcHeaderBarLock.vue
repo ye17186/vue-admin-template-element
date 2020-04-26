@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div>
     <el-tooltip effect="dark" placement="top-start"
                 :content="$t('headerBar.lock.tip')" >
       <i class="el-icon-lock" @click="show = true" :style="'font-size:' + iconSize + ';'"></i>
@@ -16,7 +16,7 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-  </span>
+  </div>
 </template>
 
 <script>
@@ -49,5 +49,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
