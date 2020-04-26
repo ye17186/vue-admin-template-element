@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" :gutter="10" style="height: 60px;">
+  <el-row type="flex" style="height: 60px;">
     <yc-header-bar-box-left class="bar-box is-left"></yc-header-bar-box-left>
     <yc-header-bar-box-mid class="bar-box is-mid"></yc-header-bar-box-mid>
     <yc-header-bar-box-right class="bar-box is-right"></yc-header-bar-box-right>
