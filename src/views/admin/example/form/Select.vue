@@ -103,14 +103,19 @@
         </el-select>
       </div>
     </demo-section>
+
+    <demo-section title="ttt">
+      <yc-china-area-select slot="body"></yc-china-area-select>
+    </demo-section>
   </div>
 </template>
 
 <script>
 import DemoSection from '../DemoSection'
+import YcChinaAreaSelect from '../../../../components/select/YcChinaAreaSelect'
 export default {
   name: 'Select',
-  components: { DemoSection },
+  components: { YcChinaAreaSelect, DemoSection },
   data: function () {
     return {
       select1: {
