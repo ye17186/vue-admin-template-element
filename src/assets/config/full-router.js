@@ -114,6 +114,14 @@ const initFullRouters = function () {
                   title: 'InputNumber',
                   icon: 'el-icon-set-up'
                 }
+              }, {
+                path: 'select',
+                name: 'Select',
+                component: () => import('../../views/admin/example/form/Select'),
+                meta: {
+                  title: 'Select',
+                  icon: 'el-icon-set-up'
+                }
               }
             ]
           }
