@@ -122,6 +122,14 @@ const initFullRouters = function () {
                   title: 'Select',
                   icon: 'el-icon-set-up'
                 }
+              }, {
+                path: 'area-select',
+                name: 'AreaSelect',
+                component: () => import('../../views/admin/example/form/AreaSelect'),
+                meta: {
+                  title: 'AreaSelect',
+                  icon: 'el-icon-set-up'
+                }
               }
             ]
           }
