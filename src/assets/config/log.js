@@ -1,5 +1,14 @@
 export default [
   {
+    date: '2020-04-28',
+    title: 'IT小跟班Admin管理系统集成InputNumber、Select、AreaSelect组件啦',
+    items: [
+      '系统顶部Header代码优化、样式略微改版',
+      '集成InputNumber组件',
+      '集成Select组件',
+      '集成AreaSelect组件，支持省市两级联动、省市区三级联动'
+    ]
+  }, {
     date: '2020-04-22',
     title: 'IT小跟班Admin管理系统Layout大改版',
     items: [
