@@ -11,7 +11,7 @@
         <yc-main-box></yc-main-box>
       </el-main>
       <el-footer height="30px" class="yc-footer-container">
-        <yc-footer-box></yc-footer-box>
+        {{ $CONFIG.web.footer }}
       </el-footer>
     </el-container>
   </el-container>
@@ -21,11 +21,10 @@
 import YcAsideBox from './YcAsideBox'
 import YcHeaderBox from './YcHeaderBox'
 import YcMainBox from './YcMainBox'
-import YcFooterBox from './YcFooterBox'
 
 export default {
   name: 'YcLayout',
-  components: { YcFooterBox, YcMainBox, YcHeaderBox, YcAsideBox },
+  components: { YcMainBox, YcHeaderBox, YcAsideBox },
   computed: {
     collapse: function () {
       return this.$store.state.collapse
@@ -68,36 +67,20 @@ export default {
       width: 100%;
       overflow: hidden;
     }
+
+    .yc-footer-container {
+      line-height: 30px;
+      text-align: center;
+      padding: 0;
+      background-color: #f0f2f5;
+      color: #767676;
+    }
   }
 </style>
 <style lang="scss">
   .yc-aside-container {
     .el-menu {
       border-right: none !important;
-    }
-  }
-  .yc-tabs-container {
-    background-color: #ffffff;
-    margin-bottom: 10px;
-    .el-tabs__header {
-      margin: 0;
-      height: 30px;
-    }
-    .el-tabs__nav .el-tabs__item:nth-child(1) span.el-icon-close{
-      display: none;
-    }
-    .el-tabs__item {
-      height: 30px !important;
-      line-height: 30px !important;
-      padding: 0 10px !important;
-      &.is-active {
-        background-color: #409eff;
-        color: #ffffff;
-        border-bottom: 1px solid #fff;
-      }
-    }
-    .el-tabs__nav-next, .el-tabs__nav-prev {
-      line-height: 30px !important;
     }
   }
 </style>

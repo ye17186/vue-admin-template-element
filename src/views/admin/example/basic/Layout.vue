@@ -1,45 +1,47 @@
 <template>
   <div>
-    <section>
-      <el-divider content-position="left">基础布局</el-divider>
-      <el-row>
-        <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
-      </el-row>
-    </section>
+    <demo-section title="基础布局">
+      <div slot="body">
+        <el-row>
+          <el-col :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="6"><div class="grid-content bg-purple-light"></div></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="4"><div class="grid-content bg-purple-light"></div></el-col>
+        </el-row>
+      </div>
+    </demo-section>
 
-    <section>
-      <el-divider content-position="left">分栏间隔</el-divider>
-      <el-row :gutter="20">
+    <demo-section title="分栏间隔">
+      <el-row slot="body" :gutter="20">
         <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
       </el-row>
-    </section>
+    </demo-section>
   </div>
 </template>
 
 <script>
+import DemoSection from '../DemoSection'
 export default {
-  name: 'Layout'
+  name: 'Layout',
+  components: { DemoSection }
 }
 </script>
 

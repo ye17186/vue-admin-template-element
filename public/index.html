@@ -1,17 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but yclouds-admin-web4 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <title>Admin管理平台 - IT小跟班</title>
+  <style>
+    html,
+    body,
+    #app {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .yc-home {
+      background-color: #303133;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .yc-home__main {
+      user-select: none;
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .yc-home__footer {
+      width: 100%;
+      flex-grow: 0;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    .yc-home__footer > a {
+      font-size: 12px;
+      color: #ABABAB;
+      text-decoration: none;
+    }
+
+    .yc-home__loading {
+      height: 32px;
+      width: 32px;
+      margin-bottom: 20px;
+    }
+
+    .yc-home__title {
+      color: #FFF;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .yc-home__sub-title {
+      color: #ABABAB;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+<noscript>
+  <strong>
+    很抱歉，如果没有 JavaScript 支持，系统将不能正常工作。请启用浏览器的 JavaScript 然后继续。
+  </strong>
+</noscript>
+<div id="app">
+  <div class="yc-home">
+    <div class="yc-home__main">
+      <img class="yc-home__loading" src="./loading.svg" alt="loading">
+      <div class="yc-home__title">
+        正在加载资源
+      </div>
+      <div class="yc-home__sub-title d">
+        初次加载资源可能需要较多时间 请耐心等待
+      </div>
+    </div>
+    <div class="yc-home__footer">
+      <a href="https://blog.it-follower.com" target="_blank">https://blog.it-follower.com</a>
+    </div>
+  </div>
+</div>
+</body>
+
 </html>

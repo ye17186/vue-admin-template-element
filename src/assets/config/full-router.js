@@ -106,6 +106,30 @@ const initFullRouters = function () {
                   title: 'Input',
                   icon: 'el-icon-set-up'
                 }
+              }, {
+                path: 'input-number',
+                name: 'InputNumber',
+                component: () => import('../../views/admin/example/form/InputNumber'),
+                meta: {
+                  title: 'InputNumber',
+                  icon: 'el-icon-set-up'
+                }
+              }, {
+                path: 'select',
+                name: 'Select',
+                component: () => import('../../views/admin/example/form/Select'),
+                meta: {
+                  title: 'Select',
+                  icon: 'el-icon-set-up'
+                }
+              }, {
+                path: 'area-select',
+                name: 'AreaSelect',
+                component: () => import('../../views/admin/example/form/AreaSelect'),
+                meta: {
+                  title: 'AreaSelect',
+                  icon: 'el-icon-set-up'
+                }
               }
             ]
           }

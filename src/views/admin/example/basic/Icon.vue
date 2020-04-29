@@ -1,28 +1,32 @@
 <template>
   <div>
-    <section>
-      <el-divider content-position="left">使用方法</el-divider>
-      <i class="el-icon-edit"></i>
-      <i class="el-icon-share"></i>
-      <i class="el-icon-delete"></i>
-      <el-button type="primary" icon="el-icon-search">搜索</el-button>
-    </section>
-    <section>
-      <el-divider content-position="left">图标集合</el-divider>
-      <ul class="icon-list">
+    <demo-section title="使用方法">
+      <p slot="desc">直接通过设置类名为<code>el-icon-iconName</code>来使用即可。例如：</p>
+      <div slot="body">
+        <i class="el-icon-edit"></i>
+        <i class="el-icon-share"></i>
+        <i class="el-icon-delete"></i>
+        <el-button type="primary" icon="el-icon-search">搜索</el-button>
+      </div>
+    </demo-section>
+
+    <demo-section title="图标集合">
+      <ul slot="body" class="icon-list">
         <li v-for="(item, index) in icons" :key="index">
           <span>
             <i :class="item"></i><span class="icon-name">{{ item }}</span>
           </span>
         </li>
       </ul>
-    </section>
+    </demo-section>
   </div>
 </template>
 
 <script>
+import DemoSection from '../DemoSection'
 export default {
   name: 'Icon',
+  components: { DemoSection },
   data: function () {
     return {
       icons: [
@@ -44,7 +48,7 @@ export default {
         'el-icon-d-arrow-left', 'el-icon-d-arrow-right', 'el-icon-video-pause', 'el-icon-video-play', 'el-icon-refresh', 'el-icon-refresh-right',
         'el-icon-refresh-left', 'el-icon-finished', 'el-icon-sort', 'el-icon-sort-up', 'el-icon-sort-down', 'el-icon-rank',
         'el-icon-loading', 'el-icon-view', 'el-icon-c-scale-to-original', 'el-icon-date', 'el-icon-edit', 'el-icon-edit-outline',
-        'el-icon-folder', 'el-icon-folder-opened', 'el-icon-folder-add', 'el-icon-folder-remove', 'el-icon-folder-delete', 'el-icon-folder-checked',
+        'el-icon-folder', 'el-icon-folder-opened', 'el-icon-folder-add', 'el-icon-folder-remove', 'el-icon-folder-delete', 'el-icon-folder-checked'
       ]
     }
   }

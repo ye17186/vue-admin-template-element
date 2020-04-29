@@ -1,7 +1,18 @@
 <template>
   <div class="yc-login-container">
-    <el-card class="yc-login-card" :header="$CONFIG.web.title + ' Admin系统'">
-<!--      <el-button @click="languageChange">language</el-button>-->
+    <el-card class="yc-login-card">
+      <div slot="header">
+        {{ $CONFIG.web.title }}Admin系统
+        <el-dropdown class="yc-lang-box" size="mini" @command="selectLang">
+          <span>
+            {{ $t('lang') }}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="zh-CN">中文</el-dropdown-item>
+            <el-dropdown-item command="en">English</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <div class="yc-errMsg-container">
         <span v-if="errMsg !== ''">*{{ errMsg }}
           <el-link :href="'mailto://' + $CONFIG.web.email">联系作者索取账号</el-link>
@@ -30,7 +41,7 @@
           <el-col :span="1">&nbsp;</el-col>
           <el-col :span="9">
             <div class="yc-imgCode-container" @click="refreshImgCode" title="看不清？换一张">
-              <img class="yc-imgCode-img" :src="imgCodeSrc" />
+              <img class="yc-imgCode-img" :src="imgCodeSrc" alt=""/>
             </div>
           </el-col>
         </el-form-item>
@@ -53,6 +64,7 @@ import RouteUtils from '../../../plugins/utils/RouteUtils'
 import CacheUtils from '../../../plugins/utils/CacheUtils'
 import FormUtils from '../../../plugins/utils/FormUtils'
 import HttpUtils from '../../../plugins/utils/HttpUtils'
+import StoreUtils from '../../../plugins/utils/StoreUtils'
 
 export default {
   name: 'Login',
@@ -74,16 +86,38 @@ export default {
       allowedMobile: ['13277033197', '13277033196']
     }
   },
+  computed: {
+    lang: function () {
+      return this.$store.state.lang
+    }
+  },
+  mounted: function () {
+    let lang = localStorage.getItem('lang')
+    if (!lang) {
+      lang = 'zh-CN'
+    }
+    this.selectLang(lang)
+  },
   methods: {
-    languageChange: function () {
-      let lang = this.$i18n.locale
-      this.$i18n.locale = lang === 'cn' ? 'en' : 'cn'
+    /**
+     * 修改语言
+     */
+    selectLang: function (lang) {
+      this.$i18n.locale = lang
+      StoreUtils.setLang(lang)
+      localStorage.setItem('lang', lang)
     },
+    /**
+     * 刷新图片验证码
+     */
     refreshImgCode: function () {
       this.imgCodeSrc = (this.imgCodeIndex++ % 2 === 0)
         ? 'http://47.92.254.223/dfs/image/201904/1909817075800001.png'
         : 'http://47.92.254.223/dfs/image/201904/1909817075800002.png'
     },
+    /**
+     * 用户登录
+     */
     doLogin: function () {
       FormUtils.validForm(this.$refs['LoginForm'], () => {
         this.Loading.LoginBtn = true
@@ -127,22 +161,32 @@ export default {
     min-height: 540px;
     width: 100%;
     background-image: url('../../../assets/image/login-bg.jpg');
+
     .yc-login-card {
       top: 80px;
       position: relative;
       width: 380px;
       height: 380px;
       margin: 0 auto;
+
+      .yc-lang-box {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+      }
+
       .yc-errMsg-container {
         line-height: 1;
         text-align: right;
         color: #ff0000;
         height: 18px;
       }
+
       .yc-imgCode-container {
         height: 40px;
         width: 100px;
         cursor: pointer;
+
         .yc-imgCode-img {
           margin-top: 1px;
           height: 100%;
@@ -150,6 +194,7 @@ export default {
           border-radius: 4px;
         }
       }
+
       .yc-footer-container {
         text-align: center;
         color: rgb(224, 224, 224);

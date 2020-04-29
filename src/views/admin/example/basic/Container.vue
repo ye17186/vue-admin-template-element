@@ -1,40 +1,39 @@
 <template>
   <div>
-    <section>
-      <el-divider content-position="left">常见页面布局1</el-divider>
-      <el-container>
+    <demo-section title="常见页面布局1">
+      <el-container slot="body">
         <el-header>Header</el-header>
         <el-main>Main</el-main>
       </el-container>
-    </section>
-    <section>
-      <el-divider content-position="left">常见页面布局2</el-divider>
-      <el-container>
+    </demo-section>
+
+    <demo-section title="常见页面布局2">
+      <el-container slot="body">
         <el-header>Header</el-header>
         <el-main>Main</el-main>
         <el-footer>Footer</el-footer>
       </el-container>
-    </section>
-    <section>
-      <el-divider content-position="left">常见页面布局3</el-divider>
-      <el-container>
+    </demo-section>
+
+    <demo-section title="常见页面布局3">
+      <el-container slot="body">
         <el-aside width="200px">Aside</el-aside>
         <el-main>Main</el-main>
       </el-container>
-    </section>
-    <section>
-      <el-divider content-position="left">常见页面布局4</el-divider>
-      <el-container>
+    </demo-section>
+
+    <demo-section title="常见页面布局4">
+      <el-container slot="body">
         <el-header>Header</el-header>
         <el-container>
           <el-aside width="200px">Aside</el-aside>
           <el-main>Main</el-main>
         </el-container>
       </el-container>
-    </section>
-    <section>
-      <el-divider content-position="left">常见页面布局5</el-divider>
-      <el-container>
+    </demo-section>
+
+    <demo-section title="常见页面布局5">
+      <el-container slot="body">
         <el-header>Header</el-header>
         <el-container>
           <el-aside width="200px">Aside</el-aside>
@@ -44,20 +43,20 @@
           </el-container>
         </el-container>
       </el-container>
-    </section>
-    <section>
-      <el-divider content-position="left">常见页面布局6</el-divider>
-      <el-container>
+    </demo-section>
+
+    <demo-section title="常见页面布局6">
+      <el-container slot="body">
         <el-aside width="200px">Aside</el-aside>
         <el-container>
           <el-header>Header</el-header>
           <el-main>Main</el-main>
         </el-container>
       </el-container>
-    </section>
-    <section>
-      <el-divider content-position="left">常见页面布局7</el-divider>
-      <el-container>
+    </demo-section>
+
+    <demo-section title="常见页面布局7">
+      <el-container slot="body">
         <el-aside width="200px">Aside</el-aside>
         <el-container>
           <el-header>Header</el-header>
@@ -65,13 +64,15 @@
           <el-footer>Footer</el-footer>
         </el-container>
       </el-container>
-    </section>
+    </demo-section>
   </div>
 </template>
 
 <script>
+import DemoSection from '../DemoSection'
 export default {
-  name: 'Container'
+  name: 'Container',
+  components: { DemoSection }
 }
 </script>
 
