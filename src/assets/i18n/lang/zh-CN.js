@@ -7,7 +7,8 @@ export default {
     code: '验证码',
     mobileEmpty: '手机号不能为空',
     passwordEmpty: '密码不能为空',
-    codeEmpty: '验证码不能为空'
+    codeEmpty: '验证码不能为空',
+    codeInvalid: '验证码不正确'
   },
   headerBar: {
     lock: {

@@ -1,6 +1,6 @@
 <template>
   <div class="lock-container">
-    <div class="lock-form bounceInDown">
+    <div class="lock-form">
       <div class="animated" :class="{'shake': pwdError, 'bounceOut': pass}">
         <h3 class="title"></h3>
         <el-input placeholder="请输入解锁密码" type="password" v-model="pwd"

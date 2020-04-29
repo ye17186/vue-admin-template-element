@@ -1,6 +1,6 @@
 <template>
   <div class="yc-login-container">
-    <el-card class="yc-login-card">
+    <el-card class="yc-login-card animated bounceInDown">
       <div slot="header">
         {{ $CONFIG.web.title }}Admin系统
         <el-dropdown class="yc-lang-box" size="mini" @command="selectLang">
@@ -18,7 +18,7 @@
           <el-link :href="'mailto://' + $CONFIG.web.email">联系作者索取账号</el-link>
         </span>
       </div>
-      <el-form label-width="80px" ref="LoginForm" :model="Request.LoginRequest">
+      <el-form label-width="80px" ref="LoginForm" :model="Request.LoginRequest" :rules="loginRules">
         <el-form-item :label="$t('login.mobile')" prop="mobile"
                       verify phone :empty-message="$t('login.mobileEmpty')">
           <el-input v-model="Request.LoginRequest.mobile" auto-complete="off" clearable>
@@ -32,18 +32,10 @@
           </el-input>
         </el-form-item>
         <el-form-item :label="$t('login.code')" prop="imgCode"
-                      verify :length = "4" :empty-message="$t('login.codeEmpty')">
-          <el-col :span="14">
-            <el-input v-model="Request.LoginRequest.imgCode" placeholder="验证码" maxlength="4" clearable>
-              <i class="el-icon-exp-ecurityCode" slot="prepend"></i>
-            </el-input>
-          </el-col>
-          <el-col :span="1">&nbsp;</el-col>
-          <el-col :span="9">
-            <div class="yc-imgCode-container" @click="refreshImgCode" title="看不清？换一张">
-              <img class="yc-imgCode-img" :src="imgCodeSrc" alt=""/>
-            </div>
-          </el-col>
+                      :verify="validImgCode" :empty-message="$t('login.codeEmpty')">
+          <yc-img-code-input ref="imgCodeInput" v-model="Request.LoginRequest.imgCode"
+                             :code-length="6"
+                             @image-change="handleImageChange"></yc-img-code-input>
         </el-form-item>
         <el-form-item>
           <el-button style="width: 100%;" type="primary" :loading="Loading.LoginBtn"
@@ -65,9 +57,11 @@ import CacheUtils from '../../../plugins/utils/CacheUtils'
 import FormUtils from '../../../plugins/utils/FormUtils'
 import HttpUtils from '../../../plugins/utils/HttpUtils'
 import StoreUtils from '../../../plugins/utils/StoreUtils'
+import YcImgCodeInput from '../../../components/input/YcImgCodeInput'
 
 export default {
   name: 'Login',
+  components: { YcImgCodeInput },
   data: function () {
     return {
       errMsg: '',
@@ -76,11 +70,17 @@ export default {
       Loading: {
         LoginBtn: false
       },
+      loginRules: {
+        imgCode: [
+          { required: true, message: 'ttt' }
+        ]
+      },
+      imgCode: '',
       Request: {
         LoginRequest: {
           mobile: '13277033197',
           password: '123456',
-          imgCode: '1234'
+          imgCode: ''
         }
       },
       allowedMobile: ['13277033197', '13277033196']
@@ -107,18 +107,26 @@ export default {
       StoreUtils.setLang(lang)
       localStorage.setItem('lang', lang)
     },
-    /**
-     * 刷新图片验证码
-     */
-    refreshImgCode: function () {
-      this.imgCodeSrc = (this.imgCodeIndex++ % 2 === 0)
-        ? 'http://47.92.254.223/dfs/image/201904/1909817075800001.png'
-        : 'http://47.92.254.223/dfs/image/201904/1909817075800002.png'
+    handleImageChange: function (value) {
+      this.imgCode = value
+      console.log(value)
+    },
+    validImgCode: function (rule, val, callback) {
+      if (val.toLowerCase() !== this.imgCode.toLowerCase()) {
+        callback(Error(this.$t('login.codeInvalid')))
+      } else {
+        callback()
+      }
     },
     /**
      * 用户登录
      */
     doLogin: function () {
+      if (this.Request.LoginRequest.imgCode.toLowerCase() !== this.imgCode.toLowerCase()) {
+        this.Request.LoginRequest.imgCode = ''
+        this.$refs.imgCodeInput.draw() // 刷新图形验证码
+        return
+      }
       FormUtils.validForm(this.$refs['LoginForm'], () => {
         this.Loading.LoginBtn = true
         HttpUtils.post(this.$API.login, this.Request.LoginRequest).then((res) => {
@@ -186,13 +194,6 @@ export default {
         height: 40px;
         width: 100px;
         cursor: pointer;
-
-        .yc-imgCode-img {
-          margin-top: 1px;
-          height: 100%;
-          width: 100%;
-          border-radius: 4px;
-        }
       }
 
       .yc-footer-container {
