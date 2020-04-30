@@ -96,7 +96,7 @@ const initFullRouters = function () {
                 component: () => import('../../views/admin/example/form/Checkbox'),
                 meta: {
                   title: 'Checkbox',
-                  icon: 'el-icon-set-up'
+                  icon: 'el-icon-document-checked'
                 }
               }, {
                 path: 'input',
@@ -104,7 +104,7 @@ const initFullRouters = function () {
                 component: () => import('../../views/admin/example/form/Input'),
                 meta: {
                   title: 'Input',
-                  icon: 'el-icon-set-up'
+                  icon: 'el-icon-edit'
                 }
               }, {
                 path: 'input-number',
@@ -112,7 +112,7 @@ const initFullRouters = function () {
                 component: () => import('../../views/admin/example/form/InputNumber'),
                 meta: {
                   title: 'InputNumber',
-                  icon: 'el-icon-set-up'
+                  icon: 'el-icon-edit-outline'
                 }
               }, {
                 path: 'select',
@@ -120,7 +120,7 @@ const initFullRouters = function () {
                 component: () => import('../../views/admin/example/form/Select'),
                 meta: {
                   title: 'Select',
-                  icon: 'el-icon-set-up'
+                  icon: 'el-icon-scissors'
                 }
               }, {
                 path: 'area-select',
@@ -128,7 +128,7 @@ const initFullRouters = function () {
                 component: () => import('../../views/admin/example/form/AreaSelect'),
                 meta: {
                   title: 'AreaSelect',
-                  icon: 'el-icon-set-up'
+                  icon: 'el-icon-s-data'
                 }
               }
             ]

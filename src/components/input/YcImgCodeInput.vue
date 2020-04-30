@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="10">
-    <el-col :span="14">
+    <el-col :span="14" style="padding: 0;">
       <el-input placeholder="验证码" :maxlength="codeLength" clearable
                 :value="value" @input="handleInput">
         <i class="el-icon-exp-ecurityCode" slot="prepend"></i>
@@ -8,7 +8,7 @@
     </el-col>
     <el-col :span="8">
       <canvas style="display: block; cursor: pointer;" title="看不清？换一张"
-              :height="height" :width="width" @click="draw"></canvas>
+              :height="height" :width="width" @click="refresh"></canvas>
     </el-col>
   </el-row>
 </template>
@@ -44,9 +44,18 @@ export default {
     this.draw()
   },
   methods: {
+    /**
+     * 刷新验证码
+     */
+    refresh: function () {
+      this.draw()
+    },
     handleInput: function (value) {
       this.$emit('input', value)
     },
+    /**
+     * 绘制验证码
+     */
     draw: function () {
       let codes = []
       this.canvas.height = this.height

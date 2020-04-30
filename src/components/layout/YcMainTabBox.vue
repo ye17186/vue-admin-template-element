@@ -5,7 +5,7 @@
              @tab-click="handleTabClick"
              @tab-remove="handleTabRemove">
       <el-tab-pane v-for="tab in pageTabs" :key="tab.name"
-                   :name="tab.name" :closable="tab.name !== 'Home'" >
+                   :name="tab.name" :closable="tab.name !== 'Home'">
         <span slot="label"><i :class="tab.meta.icon"></i> {{tab.meta.title}}</span>
       </el-tab-pane>
     </el-tabs>
@@ -42,7 +42,7 @@ export default {
      */
     handleTabClick: function (tab) {
       const to = PageUtils.getRouteByPageKey(tab.name)
-      if (to) {
+      if (to && to.name !== this.$route.name) {
         RouteUtils.goto(to)
       }
     },

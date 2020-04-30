@@ -18,27 +18,27 @@
           <el-link :href="'mailto://' + $CONFIG.web.email">联系作者索取账号</el-link>
         </span>
       </div>
-      <el-form label-width="80px" ref="LoginForm" :model="Request.LoginRequest" :rules="loginRules">
+      <el-form label-width="80px" ref="LoginForm" :model="Request.LoginRequest">
         <el-form-item :label="$t('login.mobile')" prop="mobile"
                       verify phone :empty-message="$t('login.mobileEmpty')">
-          <el-input v-model="Request.LoginRequest.mobile" auto-complete="off" clearable>
+          <el-input v-model="Request.LoginRequest.mobile" clearable>
             <i class="el-icon-exp-account" slot="prepend"></i>
           </el-input>
         </el-form-item>
         <el-form-item :label="$t('login.password')" prop="password"
-                      verify :length = "6" :empty-message="$t('login.passwordEmpty')">
-          <el-input type="password" v-model="Request.LoginRequest.password" auto-complete="off" clearable>
+                      verify :empty-message="$t('login.passwordEmpty')">
+          <el-input type="password" show-password
+                    v-model="Request.LoginRequest.password" >
             <i class="el-icon-exp-password" slot="prepend"></i>
           </el-input>
         </el-form-item>
         <el-form-item :label="$t('login.code')" prop="imgCode"
                       :verify="validImgCode" :empty-message="$t('login.codeEmpty')">
           <yc-img-code-input ref="imgCodeInput" v-model="Request.LoginRequest.imgCode"
-                             :code-length="6"
-                             @image-change="handleImageChange"></yc-img-code-input>
+                             :code-length="4" @image-change="handleImageChange"></yc-img-code-input>
         </el-form-item>
         <el-form-item>
-          <el-button style="width: 100%;" type="primary" :loading="Loading.LoginBtn"
+          <el-button style="width: 100%;" type="primary" native-type="submit" :loading="Loading.LoginBtn"
                      @click="doLogin">{{ $t('login.loginBtn') }}</el-button>
         </el-form-item>
       </el-form>
@@ -65,17 +65,10 @@ export default {
   data: function () {
     return {
       errMsg: '',
-      imgCodeIndex: 1,
-      imgCodeSrc: 'http://47.92.254.223/dfs/image/201904/1909817075800001.png',
       Loading: {
         LoginBtn: false
       },
-      loginRules: {
-        imgCode: [
-          { required: true, message: 'ttt' }
-        ]
-      },
-      imgCode: '',
+      imgCode: '', // 图形验证码的答案
       Request: {
         LoginRequest: {
           mobile: '13277033197',
@@ -109,7 +102,7 @@ export default {
     },
     handleImageChange: function (value) {
       this.imgCode = value
-      console.log(value)
+      this.Request.LoginRequest.imgCode = value
     },
     validImgCode: function (rule, val, callback) {
       if (val.toLowerCase() !== this.imgCode.toLowerCase()) {
@@ -124,7 +117,7 @@ export default {
     doLogin: function () {
       if (this.Request.LoginRequest.imgCode.toLowerCase() !== this.imgCode.toLowerCase()) {
         this.Request.LoginRequest.imgCode = ''
-        this.$refs.imgCodeInput.draw() // 刷新图形验证码
+        this.$refs.imgCodeInput.refresh() // 刷新图形验证码
         return
       }
       FormUtils.validForm(this.$refs['LoginForm'], () => {
@@ -164,12 +157,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @-webkit-keyframes animate-cloud {
+    from {
+      background-position: 600px 100%;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+  @-moz-keyframes animate-cloud {
+    from {
+      background-position: 600px 100%;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+  @-ms-keyframes animate-cloud {
+    from {
+      background-position: 600px 100%;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+  @-o-keyframes animate-cloud {
+    from {
+      background-position: 600px 100%;
+    }
+    to {
+      background-position: 0 100%;
+    }
+  }
   .yc-login-container {
     height: 100%;
     min-height: 540px;
     width: 100%;
-    background-image: url('../../../assets/image/login-bg.jpg');
-
+    background: url('../../../assets/image/bg/login-cloud.jpg') 0 bottom repeat-x #049ec4;
+    animation: animate-cloud 20s linear infinite;
     .yc-login-card {
       top: 80px;
       position: relative;

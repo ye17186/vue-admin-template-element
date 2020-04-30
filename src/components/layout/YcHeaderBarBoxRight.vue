@@ -3,7 +3,7 @@
     <yc-header-bar-lock class="header-bar-item" icon-size="20px"></yc-header-bar-lock>
     <yc-header-bar-notice class="header-bar-item" icon-size="20px"></yc-header-bar-notice>
     <yc-header-bar-lang class="header-bar-item" icon-size="20px"></yc-header-bar-lang>
-    <img class="yc-user-avatar" src="../../assets/image/wx_logo.jpg" alt="用户头像"/>
+    <img class="yc-user-avatar" src="../../assets/image/logo/wx_logo.jpg" alt="用户头像"/>
     <el-dropdown style="cursor: pointer;" @command="handleCommand">
       <span class="el-dropdown-link">
         {{ user.username }}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .header-bar-item {
     margin: 0 5px;
     cursor: pointer;
