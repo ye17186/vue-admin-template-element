@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import data from '../../assets/config/china-area-data-v4'
+import data from '../../plugins/china-area-data-v4'
 export default {
   name: 'ChinaAreaSelect2',
   props: {
