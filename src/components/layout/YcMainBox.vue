@@ -1,17 +1,17 @@
 <template>
   <div style="height: 100%;">
-    <yc-main-tab-box></yc-main-tab-box>
-    <yc-main-page-box></yc-main-page-box>
+    <i-main-tabs style="margin-bottom: 5px;"></i-main-tabs>
+    <i-main-view style="padding: 0 6px;"></i-main-view>
   </div>
 </template>
 
 <script>
-import YcMainTabBox from './YcMainTabBox'
-import YcMainPageBox from './YcMainPageBox'
+import IMainView from './IMainView'
+import IMainTabs from './IMainTabs'
 
 export default {
   name: 'YcMainBox',
-  components: { YcMainPageBox, YcMainTabBox }
+  components: { IMainTabs, IMainView }
 }
 </script>
 

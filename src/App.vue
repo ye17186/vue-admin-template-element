@@ -24,5 +24,8 @@ export default {
       height: 100%;
       min-width: 900px;
     }
+    #nprogress .bar {
+      background-color: $--color-primary;
+    }
   }
 </style>

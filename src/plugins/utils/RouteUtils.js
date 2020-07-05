@@ -1,74 +1,45 @@
-import router from '../../router'
-import store from '../../store'
-import { getFullRouters } from '../../assets/config/full-router'
-
-/**
- * 递归构建用户路由
- * @param authCodes 用户权限码
- * @param srcRouters 源路由
- * @return {*}
- */
-const buildUserRouters = function (authCodes, srcRouters) {
-  srcRouters = srcRouters.filter(router => {
-    return !(router.meta && router.meta.authCode && authCodes.indexOf(router.meta.authCode) < 0)
-  })
-  // 递归处理子路由
-  srcRouters.forEach(router => {
-    if (router.children && router.children.length > 0) {
-      router.children = buildUserRouters(authCodes, router.children)
-    }
-  })
-  return srcRouters
-}
+import VueRouter from 'vue-router'
+import router from '../../router/index'
+import { generator, staticRouters } from '../../config/config.router'
+import MenuUtils from './MenuUtils'
+import CacheUtils from './CacheUtils'
 
 export default {
+  resetRouter: function () {
+    return new VueRouter({ routes: staticRouters })
+  },
+  isStatic: (to) => {
+    const staticPaths = ['/404', '/login', '/lock']
+    return staticPaths.includes(to.path)
+  },
+  isLocked: () => {
+    return CacheUtils.getObject(CacheUtils.key.LOCK_PWD) !== null
+  },
   /**
-   * 根据用户权限码，获取用户路由
-   * @param authCodes 用户权限码数组
-   * @return {{path, name, component, children}}
+   * 加载用户路由
+   * @param permissions 用户权限数组
    */
-  getUserRouters: function (authCodes) {
-    let userRouters = getFullRouters()
-    userRouters.children = buildUserRouters(authCodes, userRouters.children)
-    return userRouters
+  loadUserRouters: (permissions) => {
+    const menus = MenuUtils.getUserMenus(permissions) // 计算用户菜单
+    CacheUtils.setObject(CacheUtils.key.USER_MENUS, menus) // 将用户菜单存入缓存
+    const dyRouters = generator(menus) // 根据菜单计算用户动态路由
+    const empty = new VueRouter({ routes: [] })
+    router.matcher = empty.matcher
+    router.addRoutes(dyRouters) // 添加基于用户权限的动态路由
+    router.addRoutes(staticRouters) // 添加静态路由，如Login，404等
   },
-  addRoutes: function (userRoutes) {
-    if (!store.state.hasAddRoutes) {
-      store.commit('setHasAddRoutes', true)
-      router.addRoutes([userRoutes])
-      // 动态路由加载完之后，再加入404、lock等路由
-      router.addRoutes([{
-        path: '/lock',
-        name: 'Lock',
-        component: () => import('../../views/admin/lock/Lock')
-      }, {
-        path: '*',
-        name: 'Page404',
-        component: () => import('../../views/admin/error/Page404')
-      }])
-    }
-  },
-  goto: function (page) {
-    const type = typeof page // 参数类型
+  goto: (to) => {
+    const type = typeof to // 参数类型
     if (type === 'string') { // String类型，则当做name路由
       router.push({
-        name: page
+        path: to
       })
     } else if (type === 'object') { // Object类型的路由方式
-      let to = {}
-      if (page.name) {
-        to.name = page.name
-      }
-      if (page.path) {
-        to.path = page.path
-      }
-      if (page.query) {
-        to.query = page.query
-      }
-      if (page.params) {
-        to.params = page.params
-      }
       router.push(to)
     }
+  },
+  gotoByKey: function (key) {
+    const to = MenuUtils.getMenuByKey(key)
+    router.push({ path: to.path })
   }
 }
