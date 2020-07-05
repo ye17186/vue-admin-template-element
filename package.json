@@ -1,6 +1,6 @@
 {
-  "name": "demo-it-follower",
-  "version": "0.1.0",
+  "name": "vue-admin-template-element",
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "serve:dev": "vue-cli-service serve --mode dev",
