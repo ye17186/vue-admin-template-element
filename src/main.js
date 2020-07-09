@@ -22,7 +22,7 @@ Vue.prototype.$API = api
 Vue.config.productionTip = false
 NProgress.configure({ showSpinner: false })
 
-if (process.env.VUE_APP_ENV === 'mock') {
+if (process.env.VUE_APP_ENV === 'dev' || process.env.VUE_APP_ENV === 'preview') {
   require('./mock')
 }
 const reload = function () {
