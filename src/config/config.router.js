@@ -1,4 +1,5 @@
 const RouterTable = {
+  UserLayout: () => import('../components/layout/ILayoutUser'),
   Login: () => import('../views/user/Login'),
   Lock: () => import('../views/lock/Lock'),
   E404: () => import('../views/error/Page404'),
@@ -18,7 +19,16 @@ const rootRouter = { path: '/', name: 'Root', component: RouterTable.Layout, chi
  * 静态路由，不要删除，可根据业务进行新增
  */
 export const staticRouters = [
-  { path: '/login', component: RouterTable.Login },
+  {
+    path: '/',
+    component: RouterTable.UserLayout,
+    children: [
+      {
+        path: 'login',
+        component: RouterTable.Login
+      }
+    ]
+  },
   { path: '/lock', component: RouterTable.Lock },
   { path: '/*', component: RouterTable.E404 }
 ]

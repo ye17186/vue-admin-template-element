@@ -16,13 +16,17 @@ export default {
   html, body {
     height: 100%;
     width: 100%;
-    padding: 0;
     margin: 0;
-    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    background-color: #fff;
+    font-feature-settings: 'tnum';
     #app {
-      width: 100%;
       height: 100%;
-      min-width: 900px;
+      width: 100%;
     }
     #nprogress .bar {
       background-color: $--color-primary;

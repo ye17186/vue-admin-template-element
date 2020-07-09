@@ -1,114 +1,148 @@
 <template>
-  <div class="i-login-container">
-    <el-card class="i-login-card animated bounceInDown">
-      <div slot="header">
-        {{ $CONFIG.web.title }}管理平台<i-lang-switcher class="i-lang-box"></i-lang-switcher>
+  <div class="i-user-login">
+    <el-form class="login-form" ref="loginForm" :rules="rules" :model="request">
+<!--      <i-lang-switcher style="float:right; top: 12px; cursor: pointer;"></i-lang-switcher>-->
+      <i-lang-switcher class="i-lang-btn" style=""></i-lang-switcher>
+      <el-tabs v-model="activeTab">
+        <el-tab-pane label="邮箱登录" name="E">
+          <template v-if="activeTab === 'E'">
+            <el-alert v-if="errors.e" type="error" style="margin-bottom: 24px;">{{ errors.e }}</el-alert>
+            <el-form-item prop="email">
+              <el-input :placeholder="$t('login.tab1.emailPlaceholder')" v-model="request.email">
+                <i-icon slot="prefix" class="el-input__icon" name="i-icon-mail"></i-icon>
+              </el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input type="password" :placeholder="$t('login.tab1.passwordPlaceholder')" v-model="request.password">
+                <i-icon slot="prefix" class="el-input__icon" name="i-icon-key"></i-icon>
+              </el-input>
+            </el-form-item>
+          </template>
+        </el-tab-pane>
+        <el-tab-pane label="手机号登录" name="M">
+          <template v-if="activeTab === 'M'">
+            <el-alert v-if="errors.m" type="error" style="margin-bottom: 24px;">{{ errors.m }}</el-alert>
+            <el-form-item prop="mobile">
+              <el-input :placeholder="$t('login.tab2.mobilePlaceholder')" v-model="request.mobile">
+                <i-icon slot="prefix" class="el-input__icon" name="i-icon-mobile"></i-icon>
+              </el-input>
+            </el-form-item>
+            <el-row :gutter="20">
+              <el-col :span="14">
+                <el-form-item prop="sms">
+                  <el-input type="password" :placeholder="$t('login.tab2.smsPlaceholder')" v-model="request.sms">
+                    <i-icon slot="prefix" class="el-input__icon" name="i-icon-key"></i-icon>
+                  </el-input>
+                </el-form-item>
+              </el-col>
+              <el-col :span="10">
+                <el-form-item>
+                  <el-button class="smsSendBtn" :disabled="smsSendBtn.disabled" @click="doSendSms">
+                    {{ !smsSendBtn.disabled && '获取验证码' || smsSendBtn.time + 's' }}
+                  </el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </template>
+        </el-tab-pane>
+      </el-tabs>
+      <el-form-item>
+        <el-button class="login-btn" type="primary" :loading="loading"
+                   @click="doLogin">登录</el-button>
+      </el-form-item>
+
+      <div class="user-login-other">
+        <span>其他登录方式</span>
+        <a><i-icon class="item-icon" name="i-icon-alipay" :icon-size="24"></i-icon></a>
+        <a><i-icon class="item-icon" name="i-icon-wechat-fill" :icon-size="24"></i-icon></a>
+        <router-link class="user-register-link" :to="{ path: 'register' }">注册账户</router-link>
       </div>
-      <el-alert v-if="errMsg !== ''" type="error" style="margin-bottom: 20px;"
-                :title="errMsg" @close="handleErrorClose">
-      </el-alert>
-      <el-form label-width="80px" ref="LoginForm" :model="Request.LoginRequest">
-        <el-form-item :label="$t('login.mobile')" prop="mobile"
-                      verify phone :empty-message="$t('login.mobileEmpty')">
-          <el-input v-model="Request.LoginRequest.mobile" clearable>
-            <i class="iconfont i-icon-user" slot="prepend"></i>
-          </el-input>
-        </el-form-item>
-        <el-form-item :label="$t('login.password')" prop="password"
-                      verify :empty-message="$t('login.passwordEmpty')">
-          <el-input type="password" show-password
-                    v-model="Request.LoginRequest.password" >
-            <i class="iconfont i-icon-key" slot="prepend"></i>
-          </el-input>
-        </el-form-item>
-        <el-form-item :label="$t('login.code')" prop="imgCode"
-                      :verify="validImgCode" :empty-message="$t('login.codeEmpty')">
-          <i-img-code-input ref="imgCodeInput" v-model="Request.LoginRequest.imgCode"
-                             :code-length="4" @image-change="handleImageChange"></i-img-code-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button style="width: 100%;" type="primary" :loading="Loading.LoginBtn"
-                     @click="doLogin">{{ $t('login.loginBtn') }}</el-button>
-        </el-form-item>
-      </el-form>
-      <div class="i-footer-container">
-        <span><i class="iconfont i-icon-copyright"></i>V{{ $CONFIG.web.version}} Designed By
-          <el-link type="primary" :href="'mailto://' + $CONFIG.web.email">{{ $CONFIG.web.author }}</el-link>
-        </span>
-        </div>
-    </el-card>
+    </el-form>
   </div>
 </template>
 
 <script>
-import IImgCodeInput from '../../components/input/IImgCodeInput'
-import ILangSwitcher from '../../components/layout/ILangSwitcher'
-import RouteUtils from '../../plugins/utils/RouteUtils'
-import CacheUtils from '../../plugins/utils/CacheUtils'
-import FormUtils from '../../plugins/utils/FormUtils'
-import HttpUtils from '../../plugins/utils/HttpUtils'
-import MenuUtils from '../../plugins/utils/MenuUtils'
 
+import IIcon from '../../components/IIcon'
+import HttpUtils from '../../plugins/utils/HttpUtils'
+import CacheUtils from '../../plugins/utils/CacheUtils'
+import RouteUtils from '../../plugins/utils/RouteUtils'
+import MenuUtils from '../../plugins/utils/MenuUtils'
+import FormUtils from '../../plugins/utils/FormUtils'
+import ILangSwitcher from '../../components/layout/ILangSwitcher'
 export default {
   name: 'Login',
-  components: { ILangSwitcher, IImgCodeInput },
+  components: { ILangSwitcher, IIcon },
   data: function () {
     return {
-      errMsg: '',
-      Loading: {
-        LoginBtn: false
+      activeTab: 'E',
+      smsCode: '',
+      request: {
+        mobile: '',
+        sms: '',
+        email: '',
+        password: ''
       },
-      imgCode: '', // 图形验证码的答案
-      Request: {
-        LoginRequest: {
-          mobile: '13200000001',
-          password: '123456',
-          imgCode: ''
-        }
+      loading: false,
+      errors: {
+        e: '',
+        m: ''
+      },
+      smsSendBtn: {
+        disabled: false,
+        time: 30
+      },
+      rules: {
+        email: [
+          { required: true, message: this.$i18n.t('login.tab1.emailEmpty') }
+        ],
+        password: [
+          { required: true, message: this.$i18n.t('login.tab1.passwordEmpty') }
+        ],
+        mobile: [
+          { required: true, message: this.$i18n.t('login.tab2.mobileEmpty') }
+        ],
+        sms: [
+          { required: true, message: this.$i18n.t('login.tab2.smsEmpty') }
+        ]
       }
     }
-  },
-  mounted: function () {
-    let lang = localStorage.getItem('lang')
-    if (!lang) {
-      lang = 'zh-CN'
-    }
-    this.$store.commit('setLang', lang)
   },
   methods: {
-    /**
-     * 修改语言
-     */
-    selectLang: function (lang) {
-      this.$i18n.locale = lang
-      this.$store.commit('setLang', lang)
+    doSendSms: function () {
+      this.smsSendBtn.disabled = true
+      const interval = window.setInterval(() => {
+        if (--this.smsSendBtn.time <= 0) {
+          this.smsSendBtn.time = 30
+          this.smsSendBtn.disabled = false
+          window.clearInterval(interval)
+        }
+      }, 1000)
+      window.setTimeout(() => {
+        this.smsCode = Math.random().toFixed(6).slice(-6)
+        this.$notify({
+          type: 'success',
+          title: '验证码获取成功',
+          message: '您的验证码为：' + this.smsCode
+        })
+      }, 1500)
     },
-    handleErrorClose: function () {
-      this.errMsg = ''
-    },
-    handleImageChange: function (value) {
-      this.imgCode = value
-      this.Request.LoginRequest.imgCode = value
-    },
-    validImgCode: function (rule, val, callback) {
-      if (val.toLowerCase() !== this.imgCode.toLowerCase()) {
-        callback(Error(this.$t('login.codeInvalid')))
-      } else {
-        callback()
-      }
-    },
-    /**
-     * 用户登录
-     */
     doLogin: function () {
-      if (this.Request.LoginRequest.imgCode.toLowerCase() !== this.imgCode.toLowerCase()) {
-        this.Request.LoginRequest.imgCode = ''
-        this.$refs.imgCodeInput.refresh() // 刷新图形验证码
-        return
-      }
-      FormUtils.validForm(this.$refs.LoginForm, () => {
-        this.Loading.LoginBtn = true
-        HttpUtils.post(this.$API.user.login, this.Request.LoginRequest).then((res) => {
+      this.errors.e = ''
+      this.errors.m = ''
+      FormUtils.validForm(this.$refs.loginForm, () => {
+        this.loading = true
+        const param = this.activeTab === 'E' ? {
+          loginType: this.activeTab,
+          email: this.request.email,
+          password: this.request.password
+        } : {
+          loginType: this.activeTab,
+          mobile: this.request.mobile,
+          sms: this.request.sms,
+          smsCode: this.smsCode
+        }
+        HttpUtils.post(this.$API.user.login, param).then(res => {
           // 缓存用户信息
           CacheUtils.setObject(CacheUtils.key.USER_INFO, res)
           // 构建用户路由表
@@ -116,9 +150,14 @@ export default {
           // 登录成功，跳转至首页
           RouteUtils.goto(MenuUtils.getIndexTab())
         }).catch(err => {
-          this.errMsg = err.msg
+          console.log(err)
+          if (this.activeTab === 'E') {
+            this.errors.e = err.msg
+          } else {
+            this.errors.m = err.msg
+          }
         }).finally(() => {
-          this.Loading.LoginBtn = false
+          this.loading = false
         })
       })
     }
@@ -127,80 +166,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @-webkit-keyframes animate-cloud {
-    from {
-      background-position: 600px 100%;
-    }
-    to {
-      background-position: 0 100%;
-    }
-  }
-
-  @-moz-keyframes animate-cloud {
-    from {
-      background-position: 600px 100%;
-    }
-    to {
-      background-position: 0 100%;
-    }
-  }
-
-  @-ms-keyframes animate-cloud {
-    from {
-      background-position: 600px 100%;
-    }
-    to {
-      background-position: 0 100%;
-    }
-  }
-
-  @-o-keyframes animate-cloud {
-    from {
-      background-position: 600px 100%;
-    }
-    to {
-      background-position: 0 100%;
-    }
-  }
-  .i-login-container {
-    height: 100%;
-    min-height: 540px;
-    width: 100%;
-    background: url('../../assets/image/bg/login-cloud.jpg') 0 bottom repeat-x #049ec4;
-    animation: animate-cloud 20s linear infinite;
-    .i-login-card {
-      top: 80px;
-      position: relative;
-      width: 380px;
-      height: 380px;
+  .i-user-login {
+    .login-form {
+      width: 328px;
       margin: 0 auto;
-      .i-lang-box {
-        position: absolute;
-        right: 10px;
+      .i-lang-btn {
+        position: relative;
+        top: 34px;
+        right: -310px;
         cursor: pointer;
+        z-index: 999
       }
-
-      .i-errMsg-container {
-        line-height: 1;
-        text-align: right;
-        color: #ff0000;
-        height: 18px;
+      .smsSendBtn {
+        display: block;
+        width: 100%;
       }
-
-      .i-imgCode-container {
+      .login-btn {
+        padding: 0 15px;
+        font-size: 16px;
         height: 40px;
-        width: 100px;
-        cursor: pointer;
+        width: 100%;
       }
+      .user-login-other {
+        text-align: left;
+        margin-top: 24px;
+        line-height: 22px;
 
-      .i-footer-container {
-        text-align: center;
+        .item-icon {
+          font-size: 24px;
+          color: rgba(0, 0, 0, 0.2);
+          margin-left: 16px;
+          vertical-align: middle;
+          cursor: pointer;
+          transition: color 0.3s;
+
+          &:hover {
+            color: $--color-primary;
+          }
+        }
+        .user-register-link {
+          float: right;
+        }
       }
     }
-  }
-</style>
-<style lang="scss">
-  .i-login-card .el-input-group__append, .el-input-group__prepend {
-    padding: 0 10px !important;
   }
 </style>

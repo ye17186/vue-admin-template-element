@@ -2,13 +2,22 @@ export default {
   lang: 'English',
   login: {
     loginBtn: 'Login',
-    mobile: 'mobile',
-    password: 'password',
-    code: 'code',
-    mobileEmpty: 'mobile can not empty',
-    passwordEmpty: 'password can not empty',
-    codeEmpty: 'verify code can not empty',
-    codeInvalid: 'verify code is invalid'
+    tab1: {
+      tabName: 'Email',
+      emailPlaceholder: 'email',
+      passwordPlaceholder: 'password',
+      emailEmpty: 'Please enter your email',
+      emailInvalid: 'E-mail format is incorrect',
+      passwordEmpty: 'Please enter password'
+    },
+    tab2: {
+      tabName: 'Mobile',
+      mobilePlaceholder: 'mobile',
+      smsPlaceholder: 'sms',
+      mobileEmpty: 'Please enter your mobile',
+      mobileInvalid: 'Mobile format is incorrect',
+      smsEmpty: 'Please enter SMS verification code'
+    }
   },
   headerBar: {
     lock: {
