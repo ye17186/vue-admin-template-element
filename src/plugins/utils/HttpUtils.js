@@ -17,7 +17,7 @@ export default {
         params: params
       }).then(res => {
         if (!flag) {
-          if (res.hasOwnProperty('code') && res.code === 0) {
+          if (res.code === 0) {
             resolve(res.data)
           } else {
             reject(res)
@@ -43,7 +43,7 @@ export default {
         data: params
       }).then(res => {
         if (!flag) {
-          if (res.hasOwnProperty('code') && res.code === 0) {
+          if (res.code === 0) {
             resolve(res.data)
           } else {
             reject(res)

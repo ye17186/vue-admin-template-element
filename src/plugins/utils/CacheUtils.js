@@ -13,7 +13,7 @@ export default {
    * @return {*}
    */
   getObject: function (key) {
-    let value = sessionStorage.getItem(key)
+    const value = sessionStorage.getItem(key)
     if (value !== null) {
       return JSON.parse(value)
     } else {
@@ -31,11 +31,11 @@ export default {
     sessionStorage.removeItem(key)
   },
   key: {
-    'USER_MENUS': 'user_menus',
-    'USER_INFO': 'USER_INFO',
-    'USER_ROUTES': 'USER_ROUTES',
-    'LOCK_PWD': 'LOCK_PWD',
-    'LOCK_ROUTER': 'LOCK_ROUTER',
-    'ACTIVE_KEY': 'ACTIVE_KEY'
+    USER_MENUS: 'user_menus',
+    USER_INFO: 'USER_INFO',
+    USER_ROUTES: 'USER_ROUTES',
+    LOCK_PWD: 'LOCK_PWD',
+    LOCK_ROUTER: 'LOCK_ROUTER',
+    ACTIVE_KEY: 'ACTIVE_KEY'
   }
 }

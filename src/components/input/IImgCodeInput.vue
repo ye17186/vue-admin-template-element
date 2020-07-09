@@ -57,17 +57,17 @@ export default {
      * 绘制验证码
      */
     draw: function () {
-      let codes = []
+      const codes = []
       this.canvas.height = this.height
       this.canvas.width = this.width
-      let context = this.canvas.getContext('2d')
+      const context = this.canvas.getContext('2d')
       for (let i = 0; i < this.codeLength; i++) {
-        let x = i * (20 - this.codeLength / 2)
-        let y = this.height / 2 + Math.random()
-        let index = Math.floor(Math.random() * 32)
+        const x = i * (20 - this.codeLength / 2)
+        const y = this.height / 2 + Math.random()
+        const index = Math.floor(Math.random() * 32)
         context.font = 'bold ' + (20 - this.codeLength) + 'px 微软雅黑'
         context.translate(x, y)
-        let deg = Math.random() * 60 * Math.PI / 180
+        const deg = Math.random() * 60 * Math.PI / 180
         context.rotate(deg) // 使画布旋转任意角度实现验证码不规则旋转
         context.fillText(this.text[index], 0, 0) // 填充文字
         context.rotate(-deg)
@@ -88,9 +88,9 @@ export default {
       this.$emit('image-change', this.codeValue)
     },
     color: function () {
-      let r = Math.floor(Math.random() * 255)
-      let g = Math.floor(Math.random() * 255)
-      let b = Math.floor(Math.random() * 255)
+      const r = Math.floor(Math.random() * 255)
+      const g = Math.floor(Math.random() * 255)
+      const b = Math.floor(Math.random() * 255)
       return `rgb(${r},${g},${b})`
     }
   }

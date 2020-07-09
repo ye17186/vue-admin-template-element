@@ -13,7 +13,7 @@ axios.interceptors.request.use(config => {
   // 在发送请求之前做些什么，添加token等
   const currentUser = CacheUtils.getObject(CacheUtils.key.USER_INFO)
   if (currentUser !== null && currentUser.token) {
-    config.headers['token'] = currentUser.token
+    config.headers.token = currentUser.token
   }
   return config
 }, error => {

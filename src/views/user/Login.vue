@@ -106,7 +106,7 @@ export default {
         this.$refs.imgCodeInput.refresh() // 刷新图形验证码
         return
       }
-      FormUtils.validForm(this.$refs['LoginForm'], () => {
+      FormUtils.validForm(this.$refs.LoginForm, () => {
         this.Loading.LoginBtn = true
         HttpUtils.post(this.$API.user.login, this.Request.LoginRequest).then((res) => {
           // 缓存用户信息
