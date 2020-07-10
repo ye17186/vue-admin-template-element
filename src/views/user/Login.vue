@@ -1,7 +1,6 @@
 <template>
   <div class="i-user-login">
     <el-form class="login-form" ref="loginForm" :rules="rules" :model="request">
-<!--      <i-lang-switcher style="float:right; top: 12px; cursor: pointer;"></i-lang-switcher>-->
       <i-lang-switcher class="i-lang-btn" style=""></i-lang-switcher>
       <el-tabs v-model="activeTab">
         <el-tab-pane label="邮箱登录" name="E">
@@ -9,12 +8,12 @@
             <el-alert v-if="errors.e" type="error" style="margin-bottom: 24px;">{{ errors.e }}</el-alert>
             <el-form-item prop="email">
               <el-input :placeholder="$t('login.tab1.emailPlaceholder')" v-model="request.email">
-                <i-icon slot="prefix" class="el-input__icon" name="i-icon-mail"></i-icon>
+                <i-icon slot="prefix" class="el-input__icon" type="i-icon-mail"></i-icon>
               </el-input>
             </el-form-item>
             <el-form-item prop="password">
               <el-input type="password" :placeholder="$t('login.tab1.passwordPlaceholder')" v-model="request.password">
-                <i-icon slot="prefix" class="el-input__icon" name="i-icon-key"></i-icon>
+                <i-icon slot="prefix" class="el-input__icon" type="i-icon-key"></i-icon>
               </el-input>
             </el-form-item>
           </template>
@@ -24,14 +23,14 @@
             <el-alert v-if="errors.m" type="error" style="margin-bottom: 24px;">{{ errors.m }}</el-alert>
             <el-form-item prop="mobile">
               <el-input :placeholder="$t('login.tab2.mobilePlaceholder')" v-model="request.mobile">
-                <i-icon slot="prefix" class="el-input__icon" name="i-icon-mobile"></i-icon>
+                <i-icon slot="prefix" class="el-input__icon" type="i-icon-mobile"></i-icon>
               </el-input>
             </el-form-item>
             <el-row :gutter="20">
               <el-col :span="14">
                 <el-form-item prop="sms">
                   <el-input type="password" :placeholder="$t('login.tab2.smsPlaceholder')" v-model="request.sms">
-                    <i-icon slot="prefix" class="el-input__icon" name="i-icon-key"></i-icon>
+                    <i-icon slot="prefix" class="el-input__icon" type="i-icon-key"></i-icon>
                   </el-input>
                 </el-form-item>
               </el-col>

@@ -1,12 +1,20 @@
 <template>
-  <i :class="'iconfont ' + name"></i>
+  <i :class="font + ' ' + type">
+    <span v-if="title">{{ title }}</span>
+    <slot v-else></slot>
+  </i>
 </template>
 
 <script>
 export default {
   name: 'IIcon',
   props: {
-    name: String
+    type: String,
+    font: {
+      type: String,
+      default: 'iconfont'
+    },
+    title: String
   }
 }
 </script>
