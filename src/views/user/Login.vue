@@ -78,10 +78,10 @@ export default {
       activeTab: 'E',
       smsCode: '',
       request: {
-        mobile: '',
+        mobile: '13200000001',
         sms: '',
-        email: '',
-        password: ''
+        email: 'ye001@163.com',
+        password: '123456'
       },
       loading: false,
       errors: {
@@ -94,7 +94,8 @@ export default {
       },
       rules: {
         email: [
-          { required: true, message: this.$i18n.t('login.tab1.emailEmpty') }
+          { required: true, message: this.$i18n.t('login.tab1.emailEmpty') },
+          { type: 'email', message: this.$i18n.t('login.tab1.emailInvalid') }
         ],
         password: [
           { required: true, message: this.$i18n.t('login.tab1.passwordEmpty') }

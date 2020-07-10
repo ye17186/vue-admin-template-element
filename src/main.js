@@ -2,23 +2,17 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
-import './plugins/element.js'
-import './plugins/axios-config'
+import './plugins'
 import i18n from './assets/i18n/i18n'
 import config from './config/config.site'
-import api from './config/api/index'
 
 import NProgress from 'nprogress'
-// import './assets/iconfont/iconfont.css'
 import 'nprogress/nprogress.css'
-import 'animate.css'
 
 import './assets/css/common.scss'
 import CacheUtils from './plugins/utils/CacheUtils'
 import RouteUtils from './plugins/utils/RouteUtils'
 
-Vue.prototype.$CONFIG = config
-Vue.prototype.$API = api
 Vue.config.productionTip = false
 NProgress.configure({ showSpinner: false })
 
