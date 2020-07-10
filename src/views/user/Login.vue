@@ -52,8 +52,8 @@
 
       <div class="user-login-other">
         <span>其他登录方式</span>
-        <a><i-icon class="item-icon" name="i-icon-alipay" :icon-size="24"></i-icon></a>
-        <a><i-icon class="item-icon" name="i-icon-wechat-fill" :icon-size="24"></i-icon></a>
+        <a><i-icon class="item-icon" type="i-icon-alipay" :icon-size="24"></i-icon></a>
+        <a><i-icon class="item-icon" type="i-icon-wechat-fill" :icon-size="24"></i-icon></a>
         <router-link class="user-register-link" :to="{ path: 'register' }">注册账户</router-link>
       </div>
     </el-form>
