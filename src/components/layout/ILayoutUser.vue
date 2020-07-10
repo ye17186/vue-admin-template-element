@@ -3,7 +3,7 @@
     <header class="header">
       <a>
         <img src="../../assets/image/logo/wx_logo.jpg" alt="用户头像"/>
-        <span class="title">Ant Design</span>
+        <span class="title">Design With ElementUI</span>
       </a>
     </header>
     <main class="main">
