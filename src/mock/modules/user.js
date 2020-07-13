@@ -69,7 +69,6 @@ const login = function (request) {
 }
 
 const register = function (request) {
-  console.log(request)
   const response = {
     code: 0,
     msg: 'SUCCESS',
