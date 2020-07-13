@@ -68,6 +68,28 @@ const login = function (request) {
   }
 }
 
+const register = function (request) {
+  console.log(request)
+  const response = {
+    code: 0,
+    msg: 'SUCCESS',
+    data: null
+  }
+  const mobiles = ['13200000001', '13200000002']
+  const emails = ['ye001@163.com', 'ye002@163.com']
+  if (mobiles.includes(request.mobile)) {
+    response.code = 1
+    response.msg = '手机号已被注册'
+  } else if (emails.includes(request.email)) {
+    response.code = 2
+    response.msg = '邮箱已被注册'
+  } else if (request.sms !== request.smsCode) {
+    response.code = 3
+    response.msg = '短信验证码不正确'
+  }
+  return response
+}
+
 export default {
-  login
+  login, register
 }

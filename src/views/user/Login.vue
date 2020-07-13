@@ -1,7 +1,7 @@
 <template>
   <div class="i-user-login">
     <el-form class="login-form" ref="loginForm" :rules="rules" :model="request">
-      <i-lang-switcher class="i-lang-btn" style=""></i-lang-switcher>
+      <i-lang-switcher class="i-lang-btn"></i-lang-switcher>
       <el-tabs v-model="activeTab">
         <el-tab-pane label="邮箱登录" name="E">
           <template v-if="activeTab === 'E'">
@@ -36,9 +36,7 @@
               </el-col>
               <el-col :span="10">
                 <el-form-item>
-                  <el-button class="smsSendBtn" :disabled="smsSendBtn.disabled" @click="doSendSms">
-                    {{ !smsSendBtn.disabled && '获取验证码' || smsSendBtn.time + 's' }}
-                  </el-button>
+                  <i-sms-send-button class="smsSendBtn" @success="handleSmsSuccess"></i-sms-send-button>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -54,7 +52,11 @@
         <span>其他登录方式</span>
         <a><i-icon class="item-icon" type="i-icon-alipay" :icon-size="24"></i-icon></a>
         <a><i-icon class="item-icon" type="i-icon-wechat-fill" :icon-size="24"></i-icon></a>
-        <router-link class="user-register-link" :to="{ path: 'register' }">注册账户</router-link>
+        <span class="user-options" >
+          <router-link :to="{ path: 'register' }">找回密码</router-link>
+          <span style="margin: 0 8px;">|</span>
+          <router-link :to="{ path: 'register' }">注册账号</router-link>
+        </span>
       </div>
     </el-form>
   </div>
@@ -69,9 +71,10 @@ import RouteUtils from '../../plugins/utils/RouteUtils'
 import MenuUtils from '../../plugins/utils/MenuUtils'
 import FormUtils from '../../plugins/utils/FormUtils'
 import ILangSwitcher from '../../components/layout/ILangSwitcher'
+import ISmsSendButton from '../../components/ISmsSendButton'
 export default {
   name: 'Login',
-  components: { ILangSwitcher, IIcon },
+  components: { ISmsSendButton, ILangSwitcher, IIcon },
   data: function () {
     return {
       activeTab: 'E',
@@ -87,10 +90,6 @@ export default {
         e: '',
         m: ''
       },
-      smsSendBtn: {
-        disabled: false,
-        time: 30
-      },
       rules: {
         email: [
           { required: true, message: this.$i18n.t('login.tab1.emailEmpty') },
@@ -100,7 +99,8 @@ export default {
           { required: true, message: this.$i18n.t('login.tab1.passwordEmpty') }
         ],
         mobile: [
-          { required: true, message: this.$i18n.t('login.tab2.mobileEmpty') }
+          { required: true, message: this.$i18n.t('login.tab2.mobileEmpty') },
+          { validator: this.$validator.mobile, message: this.$i18n.t('login.tab2.mobileInvalid') }
         ],
         sms: [
           { required: true, message: this.$i18n.t('login.tab2.smsEmpty') }
@@ -109,23 +109,8 @@ export default {
     }
   },
   methods: {
-    doSendSms: function () {
-      this.smsSendBtn.disabled = true
-      const interval = window.setInterval(() => {
-        if (--this.smsSendBtn.time <= 0) {
-          this.smsSendBtn.time = 30
-          this.smsSendBtn.disabled = false
-          window.clearInterval(interval)
-        }
-      }, 1000)
-      window.setTimeout(() => {
-        this.smsCode = Math.random().toFixed(6).slice(-6)
-        this.$notify({
-          type: 'success',
-          title: '验证码获取成功',
-          message: '您的验证码为：' + this.smsCode
-        })
-      }, 1500)
+    handleSmsSuccess: function (smsCode) {
+      this.smsCode = smsCode
     },
     doLogin: function () {
       this.errors.e = ''
@@ -168,12 +153,12 @@ export default {
 <style lang="scss" scoped>
   .i-user-login {
     .login-form {
-      width: 328px;
+      width: 368px;
       margin: 0 auto;
       .i-lang-btn {
         position: relative;
         top: 34px;
-        right: -310px;
+        right: -350px;
         cursor: pointer;
         z-index: 999
       }
@@ -204,7 +189,7 @@ export default {
             color: $--color-primary;
           }
         }
-        .user-register-link {
+        .user-options {
           float: right;
         }
       }

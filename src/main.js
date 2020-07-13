@@ -40,7 +40,7 @@ reload()
 // 页面路由前处理
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  if (to.path === '/login' || to.path === '/lock') {
+  if (to.path === '/login' || to.path === '/register' || to.path === '/lock') {
     next()
   } else if (RouteUtils.isLocked()) {
     next({ path: '/lock' })

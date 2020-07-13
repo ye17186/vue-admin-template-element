@@ -1,4 +1,5 @@
 export default {
   login: '/user/login',
-  logout: '/user/logout'
+  logout: '/user/logout',
+  register: '/user/register'
 }

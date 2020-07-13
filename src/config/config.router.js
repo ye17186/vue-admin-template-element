@@ -1,6 +1,7 @@
 const RouterTable = {
   UserLayout: () => import('../views/user/IUserLayout'),
   Login: () => import('../views/user/Login'),
+  Register: () => import('../views/user/Register'),
   Lock: () => import('../views/lock/Lock'),
   E404: () => import('../views/error/Page404'),
   Layout: () => import('../components/layout/ILayout'),
@@ -26,6 +27,9 @@ export const staticRouters = [
       {
         path: 'login',
         component: RouterTable.Login
+      }, {
+        path: 'register',
+        component: RouterTable.Register
       }
     ]
   },
